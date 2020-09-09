@@ -1,0 +1,31 @@
+[submodule "go-ipfs"]
+	path = go-ipfs
+	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-ipfs
+	branch = ppmaster
+[submodule "go-ipfs-config"]
+	path = go-ipfs-config
+	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-ipfs-config
+[submodule "go-bitswap"]
+	path = go-bitswap
+	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-bitswap
+	branch = ppmaster
+[submodule "go-eventbus"]
+	path = go-eventbus
+	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-eventbus
+[submodule "go-libp2p"]
+	path = go-libp2p
+	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-libp2p
+	branch = ppmaster
+[submodule "go-libp2p-core"]
+	path = go-libp2p-core
+	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-libp2p-core
+	branch = ppmaster
+[submodule "go-libp2p-onion-transport"]
+	path = go-libp2p-onion-transport
+	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-libp2p-onion-transport
+[submodule "go-multiaddr"]
+	path = go-multiaddr
+	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-multiaddr
+[submodule "go-multiaddr-net"]
+	path = go-multiaddr-net
+	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-multiaddr-net
