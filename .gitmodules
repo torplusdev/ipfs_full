@@ -5,6 +5,7 @@
 [submodule "go-ipfs-config"]
 	path = go-ipfs-config
 	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-ipfs-config
+	branch = ppmaster
 [submodule "go-bitswap"]
 	path = go-bitswap
 	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-bitswap
@@ -23,6 +24,7 @@
 [submodule "go-libp2p-onion-transport"]
 	path = go-libp2p-onion-transport
 	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-libp2p-onion-transport
+	branch = ppmaster
 [submodule "go-multiaddr"]
 	path = go-multiaddr
 	url = https://paidpiper2020@dev.azure.com/paidpiper2020/PaidPiper/_git/go-multiaddr
