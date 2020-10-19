@@ -19,8 +19,7 @@ pool:
 steps:
 - script: |
     git submodule update --init --recursive
-    git pull --recurse-submodules
-  displayName: 'Updating submodules'
+  displayName: 'Fetching submodules'
 
 - script: |
     go build -v ./go-ipfs/cmd/ipfs
