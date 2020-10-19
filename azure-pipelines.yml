@@ -1,0 +1,27 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+strategy:
+  matrix: 
+    linux:
+      pullName: 'Ubuntu_Pool'
+    windows:
+      pullName: 'Windows_Pool'
+
+pool:
+  name: $(pullName)
+
+steps:
+- script: |
+    git submodule update --init --recursive
+    git pull --recurse-submodules
+  displayName: 'Updating submodules'
+
+- script: |
+    go build -v ./go-ipfs/cmd/ipfs
+  displayName: 'Building'
