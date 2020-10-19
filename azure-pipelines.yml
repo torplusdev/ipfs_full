@@ -24,15 +24,7 @@ steps:
 - checkout: self 
   clean: true
   submodules: recursive
-
-#- script: |
-#    git submodule update --init --recursive
-#  displayName: 'Fetching submodules'
-
-# I am not sure we need this step.
-#- script: |
-#    git pull --recurse-submodules
-#  displayName: 'Updating submodules'
+  displayName: 'Fetching all the changes'
 
 - script: |
     go build -v
