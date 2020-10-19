@@ -22,5 +22,6 @@ steps:
   displayName: 'Fetching submodules'
 
 - script: |
-    go build -v ./go-ipfs/cmd/ipfs
-  displayName: 'Building'
+    go build -v
+  workingDirectory: $(Build.SourcesDirectory)/go-ipfs/cmd/ipfs
+  displayName: 'Building Go Ipfs'
