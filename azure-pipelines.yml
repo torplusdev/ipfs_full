@@ -25,9 +25,10 @@ steps:
     git submodule update --init --recursive
   displayName: 'Fetching submodules'
 
-- script: |
-    git pull --recurse-submodules
-  displayName: 'Updating submodules'
+# I am not sure we need this step.
+#- script: |
+#    git pull --recurse-submodules
+#  displayName: 'Updating submodules'
 
 - script: |
     go build -v
