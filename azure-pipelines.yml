@@ -21,9 +21,13 @@ pool:
   name: $(pullName)
 
 steps:
-- script: |
-    git submodule update --init --recursive
-  displayName: 'Fetching submodules'
+- checkout: self 
+  clean: true
+  submodules: recursive
+
+#- script: |
+#    git submodule update --init --recursive
+#  displayName: 'Fetching submodules'
 
 # I am not sure we need this step.
 #- script: |
