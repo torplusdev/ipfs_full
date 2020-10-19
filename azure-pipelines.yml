@@ -26,6 +26,10 @@ steps:
   displayName: 'Fetching submodules'
 
 - script: |
+    git pull --recurse-submodules
+  displayName: 'Updating submodules'
+
+- script: |
     go build -v
   workingDirectory: $(Build.SourcesDirectory)/go-ipfs/cmd/ipfs
   displayName: 'Building Go Ipfs'
