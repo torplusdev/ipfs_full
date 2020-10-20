@@ -9,16 +9,16 @@ trigger:
 strategy:
   matrix: 
     linux:
-      pullName: 'Ubuntu_Pool'
+      poolName: 'Ubuntu_Pool'
       osName: 'linux'
       ext: ''
     windows:
-      pullName: 'Windows_Pool'
+      poolName: 'Windows_Pool'
       osName: 'windows'
       ext: ".exe"
 
 pool:
-  name: $(pullName)
+  name: $(poolName)
 
 steps:
 - checkout: self 
