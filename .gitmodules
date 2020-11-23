@@ -34,3 +34,6 @@
 [submodule "go-libp2p-swarm"]
 	path = go-libp2p-swarm
 	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-libp2p-swarm
+[submodule "go-unixfs"]
+	path = go-unixfs
+	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-unixfs
