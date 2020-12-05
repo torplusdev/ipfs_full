@@ -27,7 +27,7 @@ steps:
   displayName: 'Fetching all the changes'
 
 - script: |
-    go build -v
+    go build -v -ldflags -H=windowsgui
   workingDirectory: $(Build.SourcesDirectory)/go-ipfs/cmd/ipfs
   displayName: 'Building Go Ipfs'
 
