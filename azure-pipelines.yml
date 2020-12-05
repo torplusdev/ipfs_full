@@ -12,10 +12,12 @@ strategy:
       poolName: 'Ubuntu_Pool'
       osName: 'linux'
       ext: ''
+      addldflags: ''
     windows:
       poolName: 'Windows_Pool'
       osName: 'windows'
       ext: ".exe"
+      addldflags: '-ldflags -H=windowsgui'
 
 pool:
   name: $(poolName)
@@ -27,7 +29,7 @@ steps:
   displayName: 'Fetching all the changes'
 
 - script: |
-    go build -v -ldflags -H=windowsgui
+    go build -v $(addldflags)
   workingDirectory: $(Build.SourcesDirectory)/go-ipfs/cmd/ipfs
   displayName: 'Building Go Ipfs'
 
