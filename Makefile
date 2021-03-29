@@ -1,2 +1,2 @@
 build:
-	go build ./go-ipfs/cmd/ipfs
+	(cd go-ipfs/cmd/ipfs && go build .)
