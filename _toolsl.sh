@@ -107,3 +107,14 @@ else
     echo "no files found"
 fi
 if [ -z $(git tag --merged pp_master | grep ^v0.6.0$) ]; then echo need update; fi
+
+
+
+
+for folder in go-ipfs go-libp2p-core go-libp2p go-bitswap go-libp2p-swarm go-multiaddr go-ipfs-config go-eventbus; 
+do
+    cd ${folder}
+    git checkout pp_master
+    git branch pp_master_prev
+    cd ../
+done

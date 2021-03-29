@@ -43,11 +43,15 @@ if [ -z $(cd go-eventbus && git tag --merged pp_master | grep ^v${eventbusVersio
 for folder in go-ipfs go-libp2p-core go-libp2p go-bitswap go-libp2p-swarm go-multiaddr go-ipfs-config go-eventbus; 
 do
     cd ${folder}
-    git checkout pp_master
-    git branch pp_master_prev
+    pp_master_hash=$(git rev-parse pp_master)
+    pp_master_prev_hash=$(git rev-parse pp_master_prev)
+    
+    if [[ "$pp_master_hash" != "$pp_master_prev_hash" ]]; then
+        echo "${folder} pp_master!=pp_master_prev not equal ${pp_master_hash}!=${pp_master_prev_hash}";
+        return
+    fi
     cd ../
 done
-
 
 (cd go-ipfs && git rebase ${ipfsVersion} && cd ../  )
 (cd go-libp2p-core && git rebase ${libp2pCoreVersion} && cd ../  )
