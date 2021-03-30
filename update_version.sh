@@ -2,7 +2,7 @@
 #!/bin/bash
 
 #ipfsVersion=v0.7.0
-ipfsVersionDefault="v0.7.0"
+ipfsVersionDefault="v0.8.0"
 
 ipfsVersion=$1
 echo ${ipfsVersion:=$ipfsVersionDefault}
