@@ -75,3 +75,7 @@ do
   cd ../
 done
 echo "run update complete"
+for folder in go-ipfs go-libp2p-core go-libp2p go-bitswap go-libp2p-swarm go-multiaddr go-ipfs-config go-eventbus; 
+do
+git tag p_v0.8.
+done
