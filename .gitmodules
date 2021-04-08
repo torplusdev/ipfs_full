@@ -39,4 +39,4 @@
 	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-unixfs
 [submodule "go-payment-service"]
 	path = go-payment-service
-	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/PaymentServices
+    url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/PaymentServices
