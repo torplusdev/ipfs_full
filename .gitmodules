@@ -2,6 +2,7 @@
 	path = go-ipfs
 	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-ipfs
 	branch = pp_master
+	update = rebase
 [submodule "go-ipfs-config"]
 	path = go-ipfs-config
 	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-ipfs-config
