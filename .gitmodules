@@ -7,6 +7,7 @@
 	path = go-ipfs-config
 	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-ipfs-config
 	branch = pp_master
+	update = rebase
 [submodule "go-bitswap"]
 	path = go-bitswap
 	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-bitswap
@@ -18,6 +19,7 @@
 	path = go-libp2p
 	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-libp2p
 	branch = pp_master
+	update = rebase
 [submodule "go-libp2p-core"]
 	path = go-libp2p-core
 	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-libp2p-core
@@ -26,6 +28,7 @@
 	path = go-libp2p-onion-transport
 	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-libp2p-onion-transport
 	branch = pp_master
+	update = rebase
 [submodule "go-multiaddr"]
 	path = go-multiaddr
 	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/go-multiaddr
