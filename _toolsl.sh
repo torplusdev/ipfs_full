@@ -9,6 +9,7 @@ declare -A repos=(
 [go-ipfs-config]="git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-ipfs-config"
 [go-multiaddr-net]="git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-multiaddr-net"
 [go-eventbus]="git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-eventbus"
+[go-libp2p-kad-dht]="git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-libp2p-kad-dht"
 ) 
 set +H
 for x in "${\!repos[@]}"; do printf "[%s]=%s\n" "$x" "${repos[$x]}" ; done

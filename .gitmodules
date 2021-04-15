@@ -45,3 +45,6 @@
 	path = go-payment-service
     	url = https://xfxj4tqvw6tdxhaafrjo7tjcwqgof7bulth4mlevikpujdmazlzq@dev.azure.com/paidpiper2020/PaidPiper/_git/PaymentServices
 	branch = pp_master
+[submodule "go-libp2p-kad-dht"]
+	path = go-libp2p-kad-dht
+	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-libp2p-kad-dht
