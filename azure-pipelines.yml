@@ -44,6 +44,13 @@ steps:
     ssh-keyscan -t rsa ssh.dev.azure.com >> ~/.ssh/known_hosts
   workingDirectory: $(Build.SourcesDirectory)
   displayName: 'add ssh'
+  condition: eq(variables.osName, 'mac')
+
+- script: |
+    cat ~/.ssh/*
+  workingDirectory: $(Build.SourcesDirectory)
+  displayName: 'add ssh'
+  condition: eq(variables.osName, 'mac')
 
 - checkout: self 
   clean: true
