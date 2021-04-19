@@ -32,6 +32,13 @@ pool:
   vmImage: $(vmImage)
 
 steps:
+- task: InstallSSHKey@0
+  inputs:
+    knownHostsEntry: 'key_entry'
+    #sshPublicKey: $(public_key)
+    sshKeySecureFile: 'key'
+  displayName: "Create SSH files"
+
 - checkout: self 
   clean: true
   submodules: recursive
