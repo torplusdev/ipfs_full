@@ -40,6 +40,11 @@ steps:
   displayName: "Create SSH files"
   condition: eq(variables.osName, 'mac')
 
+- script: |
+    ssh-keyscan -t rsa ssh.dev.azure.com >> ~/.ssh/known_hosts
+  workingDirectory: $(Build.SourcesDirectory)
+  displayName: 'add ssh'
+
 - checkout: self 
   clean: true
   submodules: recursive
