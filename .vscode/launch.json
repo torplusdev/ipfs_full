@@ -11,6 +11,14 @@
             "mode": "debug",
             "program": "${workspaceFolder}/go-ipfs/cmd/ipfs/",
             "args": ["daemon","--debug"]
+        },
+        {
+            "name": "IPFS Get",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/go-ipfs/cmd/ipfs/",
+            "args": ["get","QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH"]
         }
     ]
 }
