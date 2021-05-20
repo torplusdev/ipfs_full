@@ -120,28 +120,6 @@ fi
 
 chmod u=rwx,g=-,o=- /root/tor
 cd /root/tor && ls -I keys -I hidden_service -I fingerprint| xargs rm -rf
-#ipfs configuration 
-#cat /root/tor/hidden_service/hsv3/hostname
-  # # init ipfs super
-  # while [ ! -f /opt/paidpiper/common/key10/keys/hsv3/hostname ]
-  # do
-  #   sleep 2 # or less like 0.2
-  #   echo "Wait Exit Consensus ${key}"
-  # done
-  # fullOnionAddress="$(cat /opt/paidpiper/common/hidden_service/hsv3/hostname)"
-  #hsHostname:="$(sed 's/[.].*$//' /opt/paidpiper/common/hidden_service/hsv3/hostname)"
-  #echo torify curl ${fullOnionAddress}/index.html
-  #torify curl ${fullOnionAddress}/index.html
-  # ./ipfs init --announce=/onion3/${hsHostname}:4001 --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc
-  # touch /opt/paidpiper/common/.super_init
-
-  # #init upfs slave
-  # while [ ! -f /opt/paidpiper/common/.super_init ]
-  # do
-  #   sleep 2 # or less like 0.2
-  #   echo "Wait Exit Consensus ${key}"
-  # done
-  # ./ipfs init --announce=/onion3/<HIDDEN_SERVICE_HOSTNAME>:4001 --bootStrap=/onion3/<HIDDEN_SERVICE_HOSTNAME>:4001/p2p/<IPFS_SUPER_PEER_ID> --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc
 
 
 /usr/sbin/nginx -c /etc/nginx/nginx.conf -g 'daemon off;' &
@@ -184,7 +162,33 @@ if [[ "${role}" = "client" ]]; then
   touch /opt/paidpiper/common/.ping_hs
 fi
 
+#ipfs configuration 
+#cat /root/tor/hidden_service/hsv3/hostname
+# init ipfs super
+while [ ! -f /opt/paidpiper/common/key10/keys/hsv3/hostname ]
+do
+  sleep 2 # or less like 0.2
+  echo "Wait hs hostname"
+done
 sleep 50000
+
+hsHostname:="$(sed 's/[.].*$//' /opt/paidpiper/common/hidden_service/hsv3/hostname)"
+
+if [[ "${role}" = "hs_client" ]]; then 
+  ./ipfs init --announce=/onion3/${hsHostname}:4001 --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc &
+  ./ipfs --deamon
+fi
+
+if [[ "${role}" != "hs_client" ]]; then 
+  # #init upfs slave
+  while [ ! -f /opt/paidpiper/common/.super_init ]
+  do
+    sleep 2 # or less like 0.2
+    echo "Wait super init ${key}"
+  done
+fi
+/opt/paidpiper/ipfs/ipfs init --announce=/onion3/<HIDDEN_SERVICE_HOSTNAME>:4001 --bootStrap=/onion3/<HIDDEN_SERVICE_HOSTNAME>:4001/p2p/<IPFS_SUPER_PEER_ID> --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc
+
 
 #/usr/bin/supervisord
 #/usr/local/bin/tor -f /usr/local/etc/tor/torrc 2>&1 | tee "/opt/paidpiper/common/${cname}.log"
