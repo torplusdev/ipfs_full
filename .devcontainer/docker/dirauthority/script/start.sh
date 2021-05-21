@@ -12,6 +12,8 @@ esac
 #logpath=/var/log/supervisor/log.log
 logpath=/opt/paidpiper/common/${cname}.log
 logpathstart=/opt/paidpiper/common/${cname}_start.log
+logpathIpfs=/opt/paidpiper/common/ipfs${cname}.log
+
 #logpath=/var/log/supervisor/log.log
 #/usr/local/bin/tor -f /usr/local/etc/tor/torrc
 
@@ -165,17 +167,17 @@ fi
 #ipfs configuration 
 #cat /root/tor/hidden_service/hsv3/hostname
 # init ipfs super
-while [ ! -f /opt/paidpiper/common/key10/keys/hsv3/hostname ]
+while [ ! -f /opt/paidpiper/common/hidden_service/hsv3/hostname ]
 do
   sleep 2 # or less like 0.2
   echo "Wait hs hostname"
 done
 sleep 50000
 
-hsHostname:="$(sed 's/[.].*$//' /opt/paidpiper/common/hidden_service/hsv3/hostname)"
+hsHostname="$(sed 's/[.].*$//' /opt/paidpiper/common/hidden_service/hsv3/hostname)"
 
 if [[ "${role}" = "hs_client" ]]; then 
-  ./ipfs init --announce=/onion3/${hsHostname}:4001 --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc &
+  ./ipfs init --announce=/onion3/${hsHostname}:4001 --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc >> "${logpathIpfs}" &
   ./ipfs --deamon
 fi
 
@@ -186,8 +188,10 @@ if [[ "${role}" != "hs_client" ]]; then
     sleep 2 # or less like 0.2
     echo "Wait super init ${key}"
   done
-fi
-/opt/paidpiper/ipfs/ipfs init --announce=/onion3/<HIDDEN_SERVICE_HOSTNAME>:4001 --bootStrap=/onion3/<HIDDEN_SERVICE_HOSTNAME>:4001/p2p/<IPFS_SUPER_PEER_ID> --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc
+  ipfsSuperPeerID="$(cat config | jq -r '.Identity.PeerID')"
+  /opt/paidpiper/ipfs/ipfs init --announce=/onion3/${hsHostname}:4001 --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc
+
+fi 
 
 
 #/usr/bin/supervisord

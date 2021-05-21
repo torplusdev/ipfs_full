@@ -56,7 +56,8 @@ git pull origin ppmaster && \
 cd ../go-ipfs && \
 git pull origin ppmaster && \
 go build github.com/ipfs/go-ipfs/cmd/ipfs && \
-cp ./ipfs /opt/paidpiper/
+cp ./ipfs /opt/paidpiper/ipfs && \
+cp /opt/paidpiper/PaymentServices/PaymentGateway/payment-gateway /opt/paidpiper/payment-gateway
 
 
 
@@ -72,7 +73,9 @@ touch /opt/paidpiper/conf/ppgw/config.json && \
 ln -s /opt/paidpiper/conf/ppgw/config.json /opt/paidpiper/PaymentServices/PaymentGateway/config.json && \
 mkdir -m 700 -p /root/tor/hidden_service/hsv3 && \
 apt-get update && \
-apt-get install -y libevent-dev libssl-dev zlib1g-dev libcurl4 libcurl4-gnutls-dev libjson-c-dev expect torsocks links nginx vsftpd ftp vim curl supervisor gettext-base net-tools && \
+apt-get install -y libevent-dev libssl-dev zlib1g-dev libcurl4 libcurl4-gnutls-dev \
+                    libjson-c-dev expect torsocks links nginx vsftpd ftp vim curl \
+                    supervisor gettext-base net-tools jq && \
 rm -rf /var/lib/apt/lists/*
 # RUN apt-get update \
 #   && apt-get -y install gettext-base \
@@ -81,9 +84,9 @@ rm -rf /var/lib/apt/lists/*
 #############################
 ## Copy artefacts from build
 #############################
-COPY --from=build /opt/paidpiper/PaymentServices/PaymentGateway/payment-gateway /opt/paidpiper/PaymentServices/PaymentGateway/payment-gateway
+COPY --from=build /opt/paidpiper/payment-gateway /opt/paidpiper/payment-gateway
 COPY --from=build /usr/local/bin/tor /usr/local/bin/tor
-
+COPY --from=build /opt/paidpiper/ipfs /opt/paidpiper/ipfs
 #####################
 ## Copy config files
 #####################
