@@ -1,7 +1,9 @@
 version: "3.9"
 services:
   dirauth1: # dirauth
-    image: tor1
+    build: 
+      context: ./docker/dirauthority
+      dockerfile: ../../Tor.Dockerfile
     container_name: dirauth1
     environment:
       - cname=dirauth1
@@ -20,7 +22,9 @@ services:
     networks:
       - ipfs-network
   dirauth2: # dirauth
-    image: tor1
+    build: 
+      context: ./docker/dirauthority
+      dockerfile: ../../Tor.Dockerfile
     container_name: dirauth2
     environment:
       - cname=dirauth2
@@ -39,7 +43,9 @@ services:
     networks:
       - ipfs-network
   dirauth3: # dirauth
-    image: tor1
+    build: 
+      context: ./docker/dirauthority
+      dockerfile: ../../Tor.Dockerfile
     container_name: dirauth3
     environment:
       - cname=dirauth3
@@ -58,7 +64,9 @@ services:
     networks:
       - ipfs-network  
   exit1:  # exit 1
-    image: tor1
+    build: 
+      context: ./docker/dirauthority
+      dockerfile: ../../Tor.Dockerfile
     container_name: exit1
     environment:
       - cname=exit1
@@ -75,7 +83,9 @@ services:
     networks:
       - ipfs-network  
   exit2: # exit 2
-    image: tor1
+    build: 
+      context: ./docker/dirauthority
+      dockerfile: ../../Tor.Dockerfile
     container_name: exit2
     environment:
       - cname=exit2
@@ -92,7 +102,9 @@ services:
     networks:
       - ipfs-network  
   exit3: # exit 3
-    image: tor1
+    build: 
+      context: ./docker/dirauthority
+      dockerfile: ../../Tor.Dockerfile
     container_name: exit3
     environment:
       - cname=exit3
@@ -109,7 +121,9 @@ services:
     networks:
       - ipfs-network  
   exit4: # exit 4
-    image: tor1
+    build: 
+      context: ./docker/dirauthority
+      dockerfile: ../../Tor.Dockerfile
     container_name: exit4
     environment:
       - cname=exit4
@@ -126,7 +140,9 @@ services:
     networks:
       - ipfs-network
   exit5: # exit 5
-    image: tor1
+    build: 
+      context: ./docker/dirauthority
+      dockerfile: ../../Tor.Dockerfile
     container_name: exit5
     environment:
       - cname=exit5
@@ -143,7 +159,9 @@ services:
     networks:
       - ipfs-network 
   client:  # client
-    image: tor1
+    build: 
+      context: ./docker/dirauthority
+      dockerfile: ../../Tor.Dockerfile
     container_name: client
     environment:
       - cname=client
@@ -160,7 +178,9 @@ services:
     networks:
       - ipfs-network  
   hs_client: # hs_client
-    image: tor1
+    build: 
+      context: ./docker/dirauthority
+      dockerfile: ../../Tor.Dockerfile
     container_name: hs_client
     environment:
       - cname=hs_client

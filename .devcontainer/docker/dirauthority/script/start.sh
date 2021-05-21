@@ -12,7 +12,7 @@ esac
 #logpath=/var/log/supervisor/log.log
 logpath=/opt/paidpiper/common/${cname}.log
 logpathstart=/opt/paidpiper/common/${cname}_start.log
-logpathIpfs=/opt/paidpiper/common/ipfs${cname}.log
+logpathIpfs=/opt/paidpiper/common/ipfs_${cname}.log
 
 #logpath=/var/log/supervisor/log.log
 #/usr/local/bin/tor -f /usr/local/etc/tor/torrc
@@ -69,6 +69,8 @@ function consensusHandler {
     touch ${logpath}
   fi
   tail -f ${logpath} | sed '/Published ns consensus/ q'
+  
+  
   echo "Wait published microdesc consensus"
   tail -f ${logpath} | sed '/Published microdesc consensus/ q'
   touch /opt/paidpiper/common/.${cname}.consensus 
@@ -177,8 +179,12 @@ sleep 50000
 hsHostname="$(sed 's/[.].*$//' /opt/paidpiper/common/hidden_service/hsv3/hostname)"
 
 if [[ "${role}" = "hs_client" ]]; then 
-  ./ipfs init --announce=/onion3/${hsHostname}:4001 --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc >> "${logpathIpfs}" &
-  ./ipfs --deamon
+  /opt/paidpiper/ipfs init --announce=/onion3/${hsHostname}:4001 --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc | tee "${logpathIpfs}"
+  grep -v "$(jq '.Bootstrap[]' root/.ipfs/config)" root/.ipfs/config > root/.ipfs/temp && \
+  mv root/.ipfs/temp root/.ipfs/config
+  echo "$(cat /root/.ipfs/config | jq -r '.Identity.PeerID')" > /opt/paidpiper/common/ipfs_super_peer_id
+  /opt/paidpiper/ipfs daemon --debug | tee "${logpathIpfs}"
+
 fi
 
 if [[ "${role}" != "hs_client" ]]; then 
@@ -188,12 +194,14 @@ if [[ "${role}" != "hs_client" ]]; then
     sleep 2 # or less like 0.2
     echo "Wait super init ${key}"
   done
-  ipfsSuperPeerID="$(cat config | jq -r '.Identity.PeerID')"
-  /opt/paidpiper/ipfs/ipfs init --announce=/onion3/${hsHostname}:4001 --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc
-
+  ipfsSuperPeerID="$(cat /opt/paidpiper/common/ipfs_super_peer_id)"
+  /opt/paidpiper/ipfs init --announce=/onion3/${hsHostname}:4001 --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc
+  /opt/paidpiper/ipfs daemon  2>&1 | tee "${logpathIpfs}" &
+ 
 fi 
 
-
+ #tail -f ${logpath} | sed '/Daemon is ready/ q' 
 #/usr/bin/supervisord
 #/usr/local/bin/tor -f /usr/local/etc/tor/torrc 2>&1 | tee "/opt/paidpiper/common/${cname}.log"
 
+#netstat -tulpn
