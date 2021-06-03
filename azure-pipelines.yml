@@ -58,11 +58,11 @@ steps:
   displayName: 'add ssh linux'
   condition: eq(variables.osName, 'linux')
 
-#- script: |
-#    ssh-keyscan -t rsa ssh.dev.azure.com
-#  workingDirectory: $(Build.SourcesDirectory)
-#  displayName: 'add ssh windows'
-#  condition: eq(variables.osName, 'windows')
+- script: |
+    ssh-keyscan -t rsa ssh.dev.azure.com
+  workingDirectory: $(Build.SourcesDirectory)
+  displayName: 'add ssh windows'
+  condition: eq(variables.osName, 'windows')
 
 - checkout: self 
   clean: true
