@@ -44,13 +44,13 @@ steps:
     sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbFMfrNTVm6C6h03KPSO5QSdvkGpGVSZ5wvbklVJtB3XuhKb7urQYIp7zn/av5uRisJvpYJ3BWGXOfINHXPm/phBBXBR3zPFF6QZYqxFy50LVqeVPBUJpoxY+/SdipQFAs3CCTckVeQYmu3DDfuRVUMGJPljIeI2yqT8d1P3DuzmduCo+HwvBTQu6vOUaAiGLyAez4AnJqY+hFdub4RbUJq+7FrFlO02f+xDM8ZwEZqZ9grAJSpe/TiMgFDr2FNPwi5ZoTnF9Zztlsrir3foSafO61kEPGn/iajgDUrdLcKpw1oeDqLj+bijP8YVbUjoW7/GMTPOI7zPyirBqsokI62mPNsn5uGmoNR5IUd7SjZveB5bI/hWVVn47JOrxW1Csybu/TblMSRpFtmXNRpBoHiG6dBqTNiIeI1KK8+UTvw7vBVLGMnpvjKZDtC3DnRA493TVecU5/TQOdBNObGtGaJdNBhAagTj2eZfRxjBC3iywymvQZozsDJz/bFIefRV8= alex@alex-VB'
     sshKeySecureFile: 'key'
   displayName: "Create SSH files"
-  condition: eq(variables.osName, 'mac')
+#  condition: eq(variables.osName, 'mac')
 
 - script: |
     ssh-keyscan -t rsa ssh.dev.azure.com >> ~/.ssh/known_hosts
   workingDirectory: $(Build.SourcesDirectory)
   displayName: 'add ssh'
-  condition: eq(variables.osName, 'mac')
+#  condition: eq(variables.osName, 'mac')
 
 - checkout: self 
   clean: true
