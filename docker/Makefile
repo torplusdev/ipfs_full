@@ -19,3 +19,6 @@ fast_image:
 
 run_it:
 	docker run -it --name ipfs --rm -p 9051:9051 -p 9050:9050 -p 5001:5001 -p 8080:8080 -p 28080:28080 --entrypoint /bin/bash ipfs
+dockerlines:
+	cd ../ && find . -name 'go.mod' | xargs -I {} echo COPY {} {}
+	cd ../ && find . -name 'go.sum' | xargs -I {} echo COPY {} {}
