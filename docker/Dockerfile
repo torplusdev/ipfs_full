@@ -1,9 +1,4 @@
-FROM debian:10 AS cache
-WORKDIR /app
-# find . -regex '.*\/go\.sum'
-# find . -regex '.*\/go\.mod'
-COPY . .
-RUN rm -rf docker
+
 
 FROM golang:latest as build
 WORKDIR /opt/paidpiper/ipfs_full
@@ -42,12 +37,12 @@ COPY ./go-ipfs/test/dependencies/go.sum ./go-ipfs/test/dependencies/go.sum
 COPY ./go-ipfs/go.sum ./go-ipfs/go.sum
 COPY ./go-ipfs/docs/examples/go-ipfs-as-a-library/go.sum ./go-ipfs/docs/examples/go-ipfs-as-a-library/go.sum
 COPY ./go-multiaddr-net/go.sum ./go-multiaddr-net/go.sum
-WORKDIR /opt/paidpiper/ipfs_full/go-ipfs/cmd/ipfs
+WORKDIR /opt/paidpiper/ipfs_full/go-ipfs
 RUN go mod download
 WORKDIR /opt/paidpiper/ipfs_full
+RUN rm -rf *
 #--------------
-#COPY . .
-COPY --from=cache /app .
+COPY . .
 WORKDIR /opt/paidpiper/ipfs_full
 RUN make build_linux
 

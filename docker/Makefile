@@ -6,13 +6,13 @@ image:
 
 push: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
-				torplusserviceregistry.azurecr.io/private/ipfs
+	docker push torplusserviceregistry.azurecr.io/private/ipfs:latest
 image_ipfs_haproxy: 
 	docker build -f All.Dockerfile -t ipfs_haproxy -t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
 									   -t torplusserviceregistry.azurecr.io/private/ipfs_haproxy ../
 push_ipfs_haproxy: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
-				torplusserviceregistry.azurecr.io/private/ipfs_haproxy
+				torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
 fast_image:
 	cd ../ && make build_linux
 	docker build -f Fast.Dockerfile -t ipfs -t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) ../
