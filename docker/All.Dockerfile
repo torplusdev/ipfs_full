@@ -17,6 +17,10 @@ RUN make build_linux
 FROM torplusserviceregistry.azurecr.io/private/paymentgateway AS pg
 
 FROM torplusserviceregistry.azurecr.io/private/haproxy
+
+ARG IPFS_VERSION IPFS_VERSION
+ENV IPFS_VERSION $IPFS_VERSION
+
 COPY --from=pg /opt/paidpiper/payment-gateway /opt/paidpiper/payment-gateway
 COPY --from=pg /opt/paidpiper/config.json.tmpl /opt/paidpiper/config.json.tmpl
 COPY --from=pg /pg-docker-entrypoint.sh /pg-docker-entrypoint.sh
