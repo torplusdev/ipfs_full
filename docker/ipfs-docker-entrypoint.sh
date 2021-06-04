@@ -15,9 +15,15 @@ function mark {
     fi
   done
 }
+
+while [ ! -f /opt/paidpiper/.tor_ready ]; do
+  sleep 2 # or less like 0.2
+  echo "tor not ready yet..."
+done
+
 if [ $# -eq 0 ]
 then
-    /opt/paidpiper/ipfs daemon | mark "Daemon is ready" ".ipfs_ready"
+    /opt/paidpiper/ipfs daemon --debug | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready"
 else 
-    exec "$@" | mark "Daemon is ready" ".ipfs_ready"
+    exec "$@" | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready"
 fi

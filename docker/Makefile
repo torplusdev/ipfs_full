@@ -22,3 +22,6 @@ run_it:
 dockerlines:
 	cd ../ && find . -name 'go.mod' | xargs -I {} echo COPY {} {}
 	cd ../ && find . -name 'go.sum' | xargs -I {} echo COPY {} {}
+attach:
+	docker exec -it ipfs bash
+
