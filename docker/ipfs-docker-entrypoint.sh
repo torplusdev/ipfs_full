@@ -1,18 +1,21 @@
 if [[ "${no_conf}" != "1" ]]; then
   if [ ! -f /root/.ipfs ]; then 
-    source /opt/paidpiper/ipfs.${pp_env}.cfg
+    source /opt/paidpiper/ipfs.${PP_ENV}.cfg
     echo /onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID}
-    if [[ "${role}" = "hs_client" ]]; then
-      selfHsHostname="$(sed 's/[.].*$//' /opt/paidpiper/common/hidden_service/hsv3/hostname)"
+    rm -rf /root/.ipfs
+    if [[ "${role}" == "hs_client" ]]; then
+      selfHsHostname="$(sed 's/[.].*$//' /root/tor/hidden_service/hsv3/hostname)"
       /opt/paidpiper/ipfs init --announce=/onion3/${selfHsHostname}:4001 \
           --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} \
           --torPath=/usr/local/bin/tor \
           --torConfigPath=/usr/local/etc/tor/torrc
+      echo "Run as node"
     else 
       /opt/paidpiper/ipfs init \
           --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} \
           --torPath=/usr/local/bin/tor \
           --torConfigPath=/usr/local/etc/tor/torrc
+      echo "Run as client "
     fi  
   fi 
    

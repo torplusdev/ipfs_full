@@ -1,24 +1,39 @@
 VERSION:=$(shell git describe --tags --dirty --always)
+build_image:
+	docker build -f Build.Dockerfile \
+			-t build_ipfs \
+			 ../
 image: 
-	docker build --build-arg IFPS_VERSION=$(VERSION) -f Dockerfile -t ipfs -t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
-									   -t torplusserviceregistry.azurecr.io/private/ipfs ../
+	docker build --build-arg IFPS_VERSION=$(VERSION) -f Dockerfile \
+				-t ipfs \
+				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
+				-t torplusserviceregistry.azurecr.io/private/ipfs ../
 
 
 push: 
-	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
+	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:latest
 image_ipfs_haproxy: 
 	docker build -f All.Dockerfile -t ipfs_haproxy -t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
 									   -t torplusserviceregistry.azurecr.io/private/ipfs_haproxy ../
 push_ipfs_haproxy: 
-	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
-				torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
+	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) 
+	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
 fast_image:
 	cd ../ && make build_linux
 	docker build -f Fast.Dockerfile -t ipfs -t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) ../
 
 run_it:
 	docker run -it --name ipfs --rm \
+		-e PP_ENV=stage \
+		-e role=hs_client \
+		-p 9051:9051 -p 9050:9050 -p 5001:5001 -p 8080:8080 -p 28080:28080 \
+		-v $(PWD)/vol:/opt/paidpiper/vol \
+		--entrypoint /bin/bash ipfs
+run_it_prod:
+	docker run -it --name ipfs --rm \
+		-e PP_ENV=prod \
+		-e role=hs_client \
 		-p 9051:9051 -p 9050:9050 -p 5001:5001 -p 8080:8080 -p 28080:28080 \
 		-v $(PWD)/vol:/opt/paidpiper/vol \
 		--entrypoint /bin/bash ipfs
@@ -26,7 +41,11 @@ dockerlines:
 	cd ../ && find . -name 'go.mod' | xargs -I {} echo COPY {} {}
 	cd ../ && find . -name 'go.sum' | xargs -I {} echo COPY {} {}
 attach:
-	docker exec -it ipfs -- bash
+	docker exec -it ipfs bash
 
 update_config:
 	sh update.config.sh
+
+update_config_prod:
+	export PP_ENV=prod
+	sh ./update.config.sh
