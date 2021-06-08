@@ -70,6 +70,11 @@ steps:
   displayName: 'Fetching all the changes'
 
 - script: |
+    go mod download github.com/bobesa/go-domain-util
+  workingDirectory: $(Build.SourcesDirectory)/go-ipfs/cmd/ipfs
+  displayName: 'go mod download github.com/bobesa/go-domain-util'
+
+- script: |
     go build -v $(addldflags)
   workingDirectory: $(Build.SourcesDirectory)/go-ipfs/cmd/ipfs
   displayName: 'Building Go Ipfs'
