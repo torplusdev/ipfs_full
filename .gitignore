@@ -12,3 +12,4 @@
 *.out
 /ipfs
 /temp
+/docker/vol

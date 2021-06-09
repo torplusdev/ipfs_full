@@ -1,6 +1,6 @@
 FROM golang:latest as build
 WORKDIR /opt/paidpiper/ipfs_full
-RUN apt-get update && apt-get install -y build-essential manpages-dev
+RUN apt-get update && apt-get install -y build-essential manpages-dev git
 #---------------
 COPY ./go-libp2p-swarm/go.mod ./go-libp2p-swarm/go.mod
 COPY ./go-payment-service/payment-gateway-webui/go.mod ./go-payment-service/payment-gateway-webui/go.mod

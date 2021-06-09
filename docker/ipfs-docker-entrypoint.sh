@@ -1,3 +1,8 @@
+while [ ! -f /opt/paidpiper/.tor_ready ]; do
+  sleep 2 # or less like 0.2
+  echo "tor not ready yet..."
+done
+
 if [[ "${no_conf}" != "1" ]]; then
   if [ ! -f /root/.ipfs ]; then 
     source /opt/paidpiper/ipfs.${PP_ENV}.cfg
@@ -17,8 +22,7 @@ if [[ "${no_conf}" != "1" ]]; then
           --torConfigPath=/usr/local/etc/tor/torrc
       echo "Run as client "
     fi  
-  fi 
-   
+  fi  
 fi
 function mark {
   match=$1
@@ -35,11 +39,9 @@ function mark {
   done
 }
 
-while [ ! -f /opt/paidpiper/.tor_ready ]; do
-  sleep 2 # or less like 0.2
-  echo "tor not ready yet..."
-done
 
+sed -i '' -e  's/"\/ip4\/127.0.0.1\/tcp\/5001/\/ip4\/0.0.0.0\/tcp\/5001/' /root/.ipfs/config
+sed -i '' -e  's/"\/ip4\/127.0.0.1\/tcp\/8080/\/ip4\/0.0.0.0\/tcp\/8080/' /root/.ipfs/config
 if [ $# -eq 0 ]
 then
     /opt/paidpiper/ipfs daemon --debug | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready"
