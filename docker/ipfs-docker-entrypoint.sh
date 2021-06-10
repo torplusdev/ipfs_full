@@ -1,3 +1,4 @@
+#!/bin/bash
 while [ ! -f /opt/paidpiper/.tor_ready ]; do
   sleep 2 # or less like 0.2
   echo "tor not ready yet..."
@@ -38,10 +39,13 @@ function mark {
     fi
   done
 }
+SEDOPTION="-i "
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  SEDOPTION="-i ''"
+fi
 
-
-sed -i '' -e  's/"\/ip4\/127.0.0.1\/tcp\/5001/\/ip4\/0.0.0.0\/tcp\/5001/' /root/.ipfs/config
-sed -i '' -e  's/"\/ip4\/127.0.0.1\/tcp\/8080/\/ip4\/0.0.0.0\/tcp\/8080/' /root/.ipfs/config
+sed $SEDOPTION -e 's|/ip4/127.0.0.1/tcp/5001|/ip4/0.0.0.0/tcp/5001|g' /root/.ipfs/config 
+sed $SEDOPTION -e 's|/ip4/127.0.0.1/tcp/8080|/ip4/0.0.0.0/tcp/8080|g' /root/.ipfs/config
 if [ $# -eq 0 ]
 then
     /opt/paidpiper/ipfs daemon --debug | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready"

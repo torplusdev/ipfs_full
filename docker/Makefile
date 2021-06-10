@@ -7,15 +7,17 @@ image:
 	docker build --build-arg IFPS_VERSION=$(VERSION) -f Dockerfile \
 				-t ipfs \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
-				-t torplusserviceregistry.azurecr.io/private/ipfs ../
+				-t torplusserviceregistry.azurecr.io/private/ipfs:latest ../
 
 
 push: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:latest
 image_ipfs_haproxy: 
-	docker build -f All.Dockerfile -t ipfs_haproxy -t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
-									   -t torplusserviceregistry.azurecr.io/private/ipfs_haproxy ../
+	docker build -f All.Dockerfile \
+				-t ipfs_haproxy \
+				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
+				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest ../
 push_ipfs_haproxy: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
@@ -37,6 +39,14 @@ run_it_prod:
 		-p 9051:9051 -p 9050:9050 -p 5001:5001 -p 8080:8080 -p 28080:28080 \
 		-v $(PWD)/vol:/opt/paidpiper/vol \
 		--entrypoint /bin/bash ipfs
+run_ipfs_haproxy: 
+	docker run -it --name ipfs_haproxy --rm \
+		-e PP_ENV=prod \
+		-e role=hs_client \
+		--rm \
+		-p 9051:9051 -p 9050:9050 -p 8080:8080 -p 28080:28080 \
+		-v $(PWD)/vol:/opt/paidpiper/vol \
+		--entrypoint /bin/bash ipfs_haproxy:latest
 dockerlines:
 	cd ../ && find . -name 'go.mod' | xargs -I {} echo COPY {} {}
 	cd ../ && find . -name 'go.sum' | xargs -I {} echo COPY {} {}
