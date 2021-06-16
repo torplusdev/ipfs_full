@@ -180,8 +180,8 @@ done
 hsHostname="$(sed 's/[.].*$//' /opt/paidpiper/common/hidden_service/hsv3/hostname)"
 
 if [[ "${role}" = "hs_client" ]]; then 
-  /opt/paidpiper/ipfs init --announce=/onion3/${hsHostname}:4001 --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc | tee "${logpathIpfs}"
-  
+  selfHsHostname="$(sed 's/[.].*$//' /root/tor/hidden_service/hsv3/hostname)"
+  /opt/paidpiper/ipfs init --announce=/onion3/${selfHsHostname}:4001 --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc | tee "${logpathIpfs}"
   grep -v "$(jq '.Bootstrap[]' root/.ipfs/config)" root/.ipfs/config > root/.ipfs/temp && \
   mv root/.ipfs/temp root/.ipfs/config
   sed -i 's|/ip4/127.0.0.1/tcp/8080|/ip4/127.0.0.1/tcp/8090|g' /root/.ipfs/config
@@ -198,7 +198,8 @@ if [[ "${role}" != "hs_client" ]]; then
     echo "Wait super init ${key}"
   done
   ipfsSuperPeerID="$(cat /opt/paidpiper/common/ipfs_super_peer_id)"
-  /opt/paidpiper/ipfs init --announce=/onion3/${hsHostname}:4001 --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc
+ 
+  /opt/paidpiper/ipfs init --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} --torPath=/usr/local/bin/tor --torConfigPath=/usr/local/etc/tor/torrc
   /opt/paidpiper/ipfs daemon  2>&1 | tee "${logpathIpfs}" &
  
 fi 
