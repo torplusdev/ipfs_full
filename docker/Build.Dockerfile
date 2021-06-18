@@ -39,7 +39,22 @@ WORKDIR /opt/paidpiper/ipfs_full/go-ipfs
 RUN go mod download
 WORKDIR /opt/paidpiper/ipfs_full
 RUN rm -rf *
-#--------------
-COPY . .
+
+COPY go-bitswap go-bitswap
+COPY go-eventbus go-eventbus
+COPY go-ipfs go-ipfs
+COPY go-ipfs-config go-ipfs-config
+COPY go-libp2p go-libp2p
+COPY go-libp2p-core go-libp2p-core
+COPY go-libp2p-kad-dht go-libp2p-kad-dht
+COPY go-libp2p-onion-transport go-libp2p-onion-transport
+COPY go-libp2p-swarm go-libp2p-swarm
+COPY go-multiaddr go-multiaddr
+COPY go-multiaddr-net go-multiaddr-net
+COPY go-payment-service go-payment-service
+COPY ipfs_config ipfs_config
+COPY Makefile Makefile
+
+
 WORKDIR /opt/paidpiper/ipfs_full
 RUN make build_linux

@@ -1,8 +1,10 @@
 VERSION:=$(shell git describe --tags --dirty --always)
 build_image:
 	docker build -f Build.Dockerfile \
+			--no-cache \
 			-t build_ipfs \
 			 ../
+
 image: 
 	docker build --build-arg IFPS_VERSION=$(VERSION) -f Dockerfile \
 				-t ipfs \
