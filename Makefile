@@ -7,7 +7,7 @@ build:
 	rm -rf ./ipfs
 	(cd go-ipfs/cmd/ipfs && go build .)
 	mv ./go-ipfs/cmd/ipfs/ipfs ipfs 
-build_linux:
+build_current:
 	rm -rf ./ipfs
 	(cd go-ipfs/cmd/ipfs && CGO_ENABLED=1 go build -ldflags "$(LDFLAGSVERSION)" .)
 	mv ./go-ipfs/cmd/ipfs/ipfs ipfs 
