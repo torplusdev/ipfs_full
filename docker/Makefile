@@ -4,7 +4,8 @@ build_image:
 			--no-cache \
 			-t build_ipfs \
 			 ../
-
+run_build_image:
+	docker run -it --entrypoint /bin/bash build_ipfs
 image: 
 	docker build --build-arg IFPS_VERSION=$(VERSION) -f Dockerfile \
 				-t ipfs \

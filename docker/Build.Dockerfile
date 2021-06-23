@@ -57,4 +57,4 @@ COPY Makefile Makefile
 
 
 WORKDIR /opt/paidpiper/ipfs_full
-RUN make build_linux
+RUN make build_current
