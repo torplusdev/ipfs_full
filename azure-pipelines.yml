@@ -87,12 +87,12 @@ steps:
 
 - script: |
     make az_pipeline_push
-  workingDirectory: $(Build.SourcesDirectory)/PaymentGateway/docker
+  workingDirectory: $(Build.SourcesDirectory)/docker
   displayName: 'Docker build and push'
   condition: eq(variables.osName, 'linux')
 
 - script: |
     make clean_up
-  workingDirectory: $(Build.SourcesDirectory)/PaymentGateway/docker
+  workingDirectory: $(Build.SourcesDirectory)/docker
   displayName: 'make clean_up'
   condition: eq(variables.osName, 'linux')
