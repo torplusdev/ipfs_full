@@ -44,25 +44,6 @@ steps:
     sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDbFMfrNTVm6C6h03KPSO5QSdvkGpGVSZ5wvbklVJtB3XuhKb7urQYIp7zn/av5uRisJvpYJ3BWGXOfINHXPm/phBBXBR3zPFF6QZYqxFy50LVqeVPBUJpoxY+/SdipQFAs3CCTckVeQYmu3DDfuRVUMGJPljIeI2yqT8d1P3DuzmduCo+HwvBTQu6vOUaAiGLyAez4AnJqY+hFdub4RbUJq+7FrFlO02f+xDM8ZwEZqZ9grAJSpe/TiMgFDr2FNPwi5ZoTnF9Zztlsrir3foSafO61kEPGn/iajgDUrdLcKpw1oeDqLj+bijP8YVbUjoW7/GMTPOI7zPyirBqsokI62mPNsn5uGmoNR5IUd7SjZveB5bI/hWVVn47JOrxW1Csybu/TblMSRpFtmXNRpBoHiG6dBqTNiIeI1KK8+UTvw7vBVLGMnpvjKZDtC3DnRA493TVecU5/TQOdBNObGtGaJdNBhAagTj2eZfRxjBC3iywymvQZozsDJz/bFIefRV8= alex@alex-VB'
     sshKeySecureFile: 'key'
   displayName: "Create SSH files"
-#  condition: eq(variables.osName, 'mac')
-
-#- script: |
-#    ssh-keyscan -t rsa ssh.dev.azure.com >> ~/.ssh/known_hosts
-#  workingDirectory: $(Build.SourcesDirectory)
-#  displayName: 'add ssh mac'
-#  condition: eq(variables.osName, 'mac')
-#
-#- script: |
-#    ssh-keyscan -t rsa ssh.dev.azure.com >> ~/.ssh/known_hosts
-#  workingDirectory: $(Build.SourcesDirectory)
-#  displayName: 'add ssh linux'
-#  condition: eq(variables.osName, 'linux')
-#
-#- script: |
-#    ssh-keyscan -t rsa ssh.dev.azure.com
-#  workingDirectory: $(Build.SourcesDirectory)
-#  displayName: 'add ssh windows'
-#  condition: eq(variables.osName, 'windows')
 
 - checkout: self 
   clean: true
@@ -89,18 +70,29 @@ steps:
     replaceExistingArchive: true
     verbose: true
 
-#- task: ArchiveFiles@2
-#  inputs:
-#    rootFolderOrFile: '$(Build.SourcesDirectory)/go-ipfs/cmd/ipfs/ipfs$(ext)'
-#    includeRootFolder: true
-#    archiveType: '7z'
-#    sevenZipCompression: 'ultra'
-#    archiveFile: '$(Build.ArtifactStagingDirectory)/ipfs-$(osName)-latest.7z'
-#    replaceExistingArchive: true
-#    verbose: true
-
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'ipfs'
     publishLocation: 'Container'
+
+- task: Docker@1
+  inputs:
+    containerregistrytype: 'Azure Container Registry'
+    azureSubscriptionEndpoint: 'U-BTech - CSP (Georest)(8a8eed1d-a101-45a3-bb4d-34065921a9aa)'
+    azureContainerRegistry: 'torplusserviceregistry.azurecr.io'
+    command: 'login'
+  displayName: 'Docker login'
+  condition: eq(variables.osName, 'linux')
+
+- script: |
+    make az_pipeline_push
+  workingDirectory: $(Build.SourcesDirectory)/PaymentGateway/docker
+  displayName: 'Docker build and push'
+  condition: eq(variables.osName, 'linux')
+
+- script: |
+    make clean_up
+  workingDirectory: $(Build.SourcesDirectory)/PaymentGateway/docker
+  displayName: 'make clean_up'
+  condition: eq(variables.osName, 'linux')

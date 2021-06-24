@@ -11,11 +11,26 @@ image:
 				-t ipfs \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:latest ../
+az_pipeline_image:
+	docker build --build-arg IFPS_VERSION=$(VERSION) -f Dockerfile_az_pipeline \
+				-t ipfs \
+				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
+				-t torplusserviceregistry.azurecr.io/private/ipfs:latest ../
 
 
 push: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:latest
+az_pipeline_push: az_pipeline_image
+	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION)
+	docker push torplusserviceregistry.azurecr.io/private/ipfs:latest
+clean_up:
+	docker rmi --force \
+	ipfs \
+	torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
+	torplusserviceregistry.azurecr.io/private/ipfs:latest \
+	torplusserviceregistry.azurecr.io/private/paymentgateway:latest
+	docker image prune --force
 image_ipfs_haproxy: 
 	docker build -f All.Dockerfile \
 				-t ipfs_haproxy \
@@ -27,7 +42,6 @@ push_ipfs_haproxy:
 fast_image:
 	cd ../ && make build_linux
 	docker build -f Fast.Dockerfile -t ipfs -t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) ../
-
 run_it:
 	docker run -it --name ipfs --rm \
 		-e PP_ENV=stage \
