@@ -51,7 +51,12 @@ sed $SEDOPTION -e 's|/ip4/127.0.0.1/tcp/5001|/ip4/0.0.0.0/tcp/5001|g' /root/.ipf
 sed $SEDOPTION -e 's|/ip4/127.0.0.1/tcp/8080|/ip4/0.0.0.0/tcp/8080|g' /root/.ipfs/config
 if [ $# -eq 0 ]
 then
+  if [[ "${ipfs_debug}" != "1" ]]; then
     /opt/paidpiper/ipfs daemon --debug | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready"
+  else 
+    /opt/paidpiper/ipfs daemon | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready"
+  fi
+   
 else 
     exec "$@" | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready"
 fi

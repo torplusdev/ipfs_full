@@ -11,10 +11,12 @@ fi
 ssh edikk202@${bootstrapServer} "touch ~/.hushlogin"
 
 echo "${PP_ENV}"
-
+hostNamePath=/var/lib/tor/hidden_service_paidpiper/hostname
+#hostNamePath=/var/lib/tor/hidden_service_v3/hostname
 #cat /var/lib/tor/hidden_service_v3/hostname
-fullOnionAddress=$(ssh edikk202@${bootstrapServer} "cat /var/lib/tor/hidden_service_paidpiper/hostname")
-hsHostname=$(ssh edikk202@${bootstrapServer} "sed 's/[.].*$//' /var/lib/tor/hidden_service_paidpiper/hostname")
+#/var/lib/tor/hidden_service_paidpiper/
+fullOnionAddress=$(ssh edikk202@${bootstrapServer} "cat ${hostNamePath}")
+hsHostname=$(ssh edikk202@${bootstrapServer} "sed 's/[.].*$//' ${hostNamePath}")
 ipfsSuperPeerID=$(ssh edikk202@${bootstrapServer} "cat ~/.ipfs/config | jq -r '.Identity.PeerID'")
 
 

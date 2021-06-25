@@ -19,6 +19,16 @@
             "mode": "debug",
             "program": "${workspaceFolder}/go-ipfs/cmd/ipfs/",
             "args": ["get","QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH"]
+        },
+        {
+            "name": "IPFS Daemon 2",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "env": {"IPFS_PATH":"~/.ipfs2"},
+            "program": "${workspaceFolder}/go-ipfs/cmd/ipfs/",
+            "args": ["daemon","--debug"]
         }
+        
     ]
 }
