@@ -48,3 +48,7 @@
 [submodule "go-libp2p-kad-dht"]
 	path = go-libp2p-kad-dht
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-libp2p-kad-dht
+[submodule "go-libp2p-kbucket"]
+	path = go-libp2p-kbucket
+	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-libp2p-kbucket
+	branch = master
