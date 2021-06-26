@@ -3,7 +3,7 @@ while [ ! -f /opt/paidpiper/.tor_ready ]; do
   sleep 2 # or less like 0.2
   echo "tor not ready yet..."
 done
-
+torDataDir="/Users/tumarsal/tor"
 if [[ "${no_conf}" != "1" ]]; then
   if [ ! -f /root/.ipfs ]; then 
     source /opt/paidpiper/ipfs.${PP_ENV}.cfg
@@ -12,7 +12,7 @@ if [[ "${no_conf}" != "1" ]]; then
     then
       rm -rf /root/.ipfs
       if [[ "${role}" == "hs_client" ]]; then
-        selfHsHostname="$(sed 's/[.].*$//' /root/tor/hidden_service/hsv3/hostname)"
+        selfHsHostname="$(sed 's/[.].*$//' ${torDataDir}/hidden_service/hsv3/hostname)"
         /opt/paidpiper/ipfs init --announce=/onion3/${selfHsHostname}:4001 \
             --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} \
             --torPath=/usr/local/bin/tor \

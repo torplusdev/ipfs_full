@@ -71,7 +71,8 @@ attach:
 	docker exec -it ipfs bash
 
 update_config:
-	sh update.config.sh
+	export PP_ENV=stage
+	./update.config.sh
 
 update_config_prod:
 	export PP_ENV=prod
