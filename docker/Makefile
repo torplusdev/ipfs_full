@@ -12,7 +12,7 @@ image:
 				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:latest ../
 az_pipeline_image:
-	docker build --build-arg IFPS_VERSION=$(VERSION) -f Dockerfile_az_pipeline \
+	docker build --build-arg IFPS_VERSION=$(VERSION) -f AzPipeline.Dockerfile \
 				-t ipfs \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:latest ../
