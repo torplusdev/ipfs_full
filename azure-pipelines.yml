@@ -6,6 +6,9 @@
 trigger:
 - pp_master
 
+workspace:
+  clean: all
+
 strategy:
   matrix: 
     linux:
@@ -45,7 +48,7 @@ steps:
     sshKeySecureFile: 'key'
   displayName: "Create SSH files"
 
-- checkout: self 
+- checkout: self
   clean: true
   submodules: recursive
   displayName: 'Fetching all the changes'
