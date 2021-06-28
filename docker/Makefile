@@ -29,15 +29,24 @@ clean_up:
 	ipfs \
 	torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
 	torplusserviceregistry.azurecr.io/private/ipfs:latest \
-	torplusserviceregistry.azurecr.io/private/paymentgateway:latest
+	torplusserviceregistry.azurecr.io/private/paymentgateway:latest \
+	torplusserviceregistry.azurecr.io/private/haproxy:latest
 	docker image prune --force
 image_ipfs_haproxy: 
 	docker build -f All.Dockerfile \
 				-t ipfs_haproxy \
 				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
 				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest ../
+az_pipeline_image_ipfs_haproxy:
+	docker build -f AzPipeline.All.Dockerfile \
+				-t ipfs_haproxy \
+				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
+				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest ../
 push_ipfs_haproxy: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) 
+	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
+az_pipeline_push_ipfs_haproxy: az_pipeline_image_ipfs_haproxy
+	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION)
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
 fast_image:
 	cd ../ && make build_linux

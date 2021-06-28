@@ -91,7 +91,13 @@ steps:
 - script: |
     make az_pipeline_push
   workingDirectory: $(Build.SourcesDirectory)/docker
-  displayName: 'Docker build and push'
+  displayName: 'Docker build and push ipfs'
+  condition: eq(variables.osName, 'linux')
+
+- script: |
+    az_pipeline_push_ipfs_haproxy
+  workingDirectory: $(Build.SourcesDirectory)/docker
+  displayName: 'Docker build and push ipfs_haproxy'
   condition: eq(variables.osName, 'linux')
 
 - script: |
