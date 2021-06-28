@@ -52,6 +52,7 @@ COPY go-libp2p-swarm go-libp2p-swarm
 COPY go-multiaddr go-multiaddr
 COPY go-multiaddr-net go-multiaddr-net
 COPY go-payment-service go-payment-service
+COPY go-libp2p-kbucket go-libp2p-kbucket
 COPY ipfs_config ipfs_config
 COPY Makefile Makefile
 
