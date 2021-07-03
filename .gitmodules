@@ -15,6 +15,8 @@
 [submodule "go-eventbus"]
 	path = go-eventbus
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-eventbus
+    branch = pp_master
+    update = rebase
 [submodule "go-libp2p"]
 	path = go-libp2p
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-libp2p
@@ -32,12 +34,16 @@
 [submodule "go-multiaddr"]
 	path = go-multiaddr
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-multiaddr
+    branch = pp_master
+    update = rebase
 [submodule "go-multiaddr-net"]
 	path = go-multiaddr-net
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-multiaddr-net
 [submodule "go-libp2p-swarm"]
 	path = go-libp2p-swarm
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-libp2p-swarm
+    branch = pp_master
+    update = rebase
 [submodule "go-unixfs"]
 	path = go-unixfs
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-unixfs
@@ -48,7 +54,10 @@
 [submodule "go-libp2p-kad-dht"]
 	path = go-libp2p-kad-dht
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-libp2p-kad-dht
+    branch = pp_master
+    update = rebase
 [submodule "go-libp2p-kbucket"]
 	path = go-libp2p-kbucket
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-libp2p-kbucket
 	branch = master
+	update = rebase
