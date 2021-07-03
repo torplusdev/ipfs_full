@@ -39,6 +39,9 @@
 [submodule "go-multiaddr-net"]
 	path = go-multiaddr-net
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-multiaddr-net
+	branch = pp_master
+	update = rebase
+
 [submodule "go-libp2p-swarm"]
 	path = go-libp2p-swarm
 	url = git@ssh.dev.azure.com:v3/paidpiper2020/PaidPiper/go-libp2p-swarm
