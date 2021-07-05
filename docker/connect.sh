@@ -1,4 +1,4 @@
-PP_ENV=prod
+PP_ENV=stage
 if [[ "${PP_ENV}" = "stage" ]]; then
     bootstrapServer="13.95.67.71"
    

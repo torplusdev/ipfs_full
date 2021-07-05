@@ -81,8 +81,13 @@ attach:
 
 update_config:
 	export PP_ENV=stage
-	./update.config.sh
+	sh ./update.config.sh
+
 
 update_config_prod:
-	export PP_ENV=prod
+	export PP_ENV=stage
 	sh ./update.config.sh
+
+init:
+	rm -rf ~/.ipfs
+	sh ./ipfs.init.sh
