@@ -1,5 +1,5 @@
 #!/bin/bash
-export PP_ENV=stage
+export PP_ENV=prod
 source ipfs.${PP_ENV}.cfg
 echo /onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID}
 
