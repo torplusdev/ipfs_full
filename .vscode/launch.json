@@ -21,6 +21,14 @@
             "args": ["get","QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH"]
         },
         {
+            "name": "IPFS Swarm peers",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/go-ipfs/cmd/ipfs/",
+            "args": ["swarm","peers"]
+        },
+        {
             "name": "IPFS Daemon 2",
             "type": "go",
             "request": "launch",

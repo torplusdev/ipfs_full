@@ -80,14 +80,12 @@ attach:
 	docker exec -it ipfs bash
 
 update_config:
-	export PP_ENV=stage
-	sh ./update.config.sh
+	PP_ENV=stage sh ./update.config.sh
 
 
 update_config_prod:
-	export PP_ENV=stage
-	sh ./update.config.sh
+	PP_ENV=stage sh ./update.config.sh
 
 init:
 	rm -rf ~/.ipfs
-	sh ./ipfs.init.sh
+	PP_ENV=stage sh ./ipfs.init.sh

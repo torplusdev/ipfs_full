@@ -12,9 +12,7 @@ build_current:
 	(cd go-ipfs/cmd/ipfs && CGO_ENABLED=1 go build -ldflags "$(LDFLAGSVERSION)" .)
 	mv ./go-ipfs/cmd/ipfs/ipfs ipfs 
 run-daemon:
-	./go-ipfs/cmd/ipfs/ipfs daemon
-init:
-	./ipfs init --bootStrap=/onion3/aec7fj7zj7dax3lzsv73mhlvplikjlauhtm6bk5dkupnkfq5csqvyjid:4001/p2p/12D3KooWQdJBVG7FZFYY5okznqYvApYCSCLxrkBLNHysTAde83UY --torPath=/Users/tumarsal/Documents/PaidPiper2020/tools/tor/tor --torConfigPath=/Users/tumarsal/Documents/PaidPiper2020/tools/tor/torrc
+	./ipfs daemon
 clean:
 	rm -rf ./.devcontainer/docker/dirauthority/common 
 tor_up: clean
@@ -28,4 +26,6 @@ dummy_files:
 	sh ./.devcontainer/docker/dirauthority/script/dummy_files.sh
 rebuild_image:
 	cd ./.devcontainer && docker build -t tor1 -f Tor.Dockerfile ./docker/dirauthority/
-	
+
+init:
+	cd docker && make init
