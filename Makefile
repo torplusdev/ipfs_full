@@ -1,4 +1,6 @@
-
+VERSION:=$(shell git describe --tags --dirty --always)
+COMMIT_HASH:=$(shell git rev-parse --short HEAD 2>/dev/null)
+BUILD_DATE:=$(shell date "+%Y-%m-%d")
 PKG:=github.com/ipfs/go-ipfs/version
 LDFLAGSVERSION:=-X $(PKG).commitHash=$(COMMIT_HASH) -X $(PKG).buildDate=$(BUILD_DATE) -X $(PKG).version=$(VERSION)
 # 
