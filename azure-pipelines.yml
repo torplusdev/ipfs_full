@@ -17,18 +17,21 @@ strategy:
       osName: 'linux'
       ext: ''
       addldflags: ''
+      addBuildNumber: 'BUILD_NUMBER=$(Build.BuildNumber)'
     windows:
       poolName: 'Windows_Pool'
       vmImage:
       osName: 'windows'
       ext: ".exe"
       addldflags: '-ldflags -H=windowsgui'
+      addBuildNumber: ''
     mac:
       poolName: 'Azure Pipelines'
       vmImage: 'macOS-10.14'
       osName: 'mac'
       ext: ''
       addldflags: ''
+      addBuildNumber: 'BUILD_NUMBER=$(Build.BuildNumber)'
 
 pool:
   name: $(poolName)
@@ -61,7 +64,7 @@ steps:
   displayName: 'go download deps'
 
 - script: |
-    BUILD_NUMBER=$(Build.BuildNumber) go build -v $(addldflags)
+    $(addBuildNumber) go build -v $(addldflags)
   workingDirectory: $(Build.SourcesDirectory)/go-ipfs/cmd/ipfs
   displayName: 'Building Go Ipfs'
 
