@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get install -y curl supervisor gettext-base && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /opt/paidpiper/
-COPY go-ipfs/cmd/ipfs/ipfs ipfs
+COPY ipfs ipfs
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/ipfs.prod.cfg ipfs.prod.cfg
 COPY docker/ipfs.stage.cfg ipfs.stage.cfg

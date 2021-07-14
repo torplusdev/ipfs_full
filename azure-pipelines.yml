@@ -61,7 +61,7 @@ steps:
   displayName: 'go download deps'
 
 - script: |
-    go build -v $(addldflags)
+    BUILD_NUMBER=$(Build.BuildNumber) make build -v $(addldflags)
   workingDirectory: $(Build.SourcesDirectory)/go-ipfs/cmd/ipfs
   displayName: 'Building Go Ipfs'
 
