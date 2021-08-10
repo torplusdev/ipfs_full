@@ -7,7 +7,7 @@ LDFLAGSVERSION:=-X $(PKG).commitHash=$(COMMIT_HASH) -X $(PKG).buildDate=$(BUILD_
 
 build:
 	rm -rf ./ipfs
-	(cd go-ipfs/cmd/ipfs && go build .)
+	(cd go-ipfs/cmd/ipfs && go build -ldflags "$(LDFLAGSVERSION)" .)
 	mv ./go-ipfs/cmd/ipfs/ipfs ipfs 
 build_current:
 	rm -rf ./ipfs
