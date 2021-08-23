@@ -11,19 +11,11 @@ image:
 				-t ipfs \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:latest ../
-az_pipeline_image:
-	docker build --build-arg IFPS_VERSION=$(VERSION) -f AzPipeline.Dockerfile \
-				-t ipfs \
-				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
-				-t torplusserviceregistry.azurecr.io/private/ipfs:latest ../
-
 
 push: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:latest
-az_pipeline_push: az_pipeline_image
-	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION)
-	docker push torplusserviceregistry.azurecr.io/private/ipfs:latest
+
 clean_up:
 	docker rmi --force \
 	ipfs \
@@ -37,17 +29,12 @@ image_ipfs_haproxy:
 				-t ipfs_haproxy \
 				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
 				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest ../
-az_pipeline_image_ipfs_haproxy:
-	docker build -f AzPipeline.All.Dockerfile \
-				-t ipfs_haproxy \
-				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
-				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest ../
+
+
 push_ipfs_haproxy: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
-az_pipeline_push_ipfs_haproxy: az_pipeline_image_ipfs_haproxy
-	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION)
-	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
+
 fast_image:
 	cd ../ && make build_linux
 	docker build -f Fast.Dockerfile -t ipfs -t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) ../
