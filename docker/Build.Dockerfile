@@ -35,6 +35,8 @@ COPY ./go-ipfs/test/dependencies/go.sum ./go-ipfs/test/dependencies/go.sum
 COPY ./go-ipfs/go.sum ./go-ipfs/go.sum
 COPY ./go-ipfs/docs/examples/go-ipfs-as-a-library/go.sum ./go-ipfs/docs/examples/go-ipfs-as-a-library/go.sum
 COPY ./go-multiaddr-net/go.sum ./go-multiaddr-net/go.sum
+COPY ./go-libp2p-kbucket/go.mod ./go-libp2p-kbucket/go.mod 
+COPY ./go-libp2p-kbucket/go.sum ./go-libp2p-kbucket/go.sum 
 WORKDIR /opt/paidpiper/ipfs_full/go-ipfs
 RUN go mod download
 WORKDIR /opt/paidpiper/ipfs_full
