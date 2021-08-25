@@ -95,18 +95,8 @@ steps:
 
 - script: |
     make build_image && make image && make push
-  workingDirectory: $(Build.SourcesDirectory)/docker
-  displayName: 'Docker build and push ipfs'
-  condition: eq(variables.osName, 'linux')
-
-- script: |
-    maek image_ipfs_haproxy && make push_ipfs_haproxy 
-  workingDirectory: $(Build.SourcesDirectory)/docker
-  displayName: 'Docker build and push ipfs_haproxy'
-  condition: eq(variables.osName, 'linux')
-
-- script: |
+    make image_ipfs_haproxy && make push_ipfs_haproxy 
     make clean_up
   workingDirectory: $(Build.SourcesDirectory)/docker
-  displayName: 'make clean_up'
+  displayName: 'Docker build and push ipfs'
   condition: eq(variables.osName, 'linux')
