@@ -71,7 +71,7 @@ update_config:
 
 
 update_config_prod:
-	PP_ENV=stage sh ./update.config.sh
+	PP_ENV=prod sh ./update.config.sh
 
 init:
 	rm -rf ~/.ipfs
