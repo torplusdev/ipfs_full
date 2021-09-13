@@ -44,7 +44,7 @@
             "env": {"IPFS_PATH":"~/.ipfs2"},
             "program": "${workspaceFolder}/go-ipfs/cmd/ipfs/",
             "args": ["daemon","--debug"]
-        }
+        },
         {
             "name": "PG",
             "type": "go",
@@ -57,6 +57,17 @@
                 "SCOYT53V54NK2SKLMU4QVHBEGIXQHG3QHWQTEYCJ7WSVT2Q37XGTGZSO",
                 "28080"
             ]
+        },
+        {
+            "name": "IPFS Init",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/go-ipfs/cmd/ipfs/",
+            "args": ["init","--announce=/onion3/izqprnuuhf3ppcfkoky6kntgxmklskyeuffproorsrwzah3qh7ykmeyd:4001",
+            "--bootStrap=/onion3/5wncrawvcbfwtzexdxxyyazd3cl7jf6b2wlwfqewz5i7kjwklhw3inqd:4001/p2p/12D3KooWJxq8dh1pqUfnsZB3Y6Lq5TVJCiyAG3CUijLTytj2rpWy",
+        "--torPath=/usr/local/bin/tor",
+        "--torConfigPath=/usr/local/etc/tor/torrc"]  
         }
     ]
 }
