@@ -1,4 +1,4 @@
-FROM golang:latest as build
+FROM golang:1.16.8 as build
 WORKDIR /opt/paidpiper/ipfs_full
 RUN apt-get update && apt-get install -y build-essential manpages-dev git
 #---------------
