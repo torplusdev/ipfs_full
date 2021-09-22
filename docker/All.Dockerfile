@@ -24,7 +24,7 @@ COPY docker/ipfs.prod.cfg ipfs.prod.cfg
 COPY docker/ipfs.stage.cfg ipfs.stage.cfg
 COPY docker/ipfs-docker-entrypoint.sh /ipfs-docker-entrypoint.sh
 RUN chmod 755 /ipfs-docker-entrypoint.sh
-COPY docker/debug-start.sh /debug-start.sh
+COPY docker/debug-start-haproxy.sh /debug-start.sh
 RUN chmod 755 /debug-start.sh
 ENTRYPOINT [ "/debug-start.sh" ]
 #ENTRYPOINT ["/usr/bin/supervisord"]
