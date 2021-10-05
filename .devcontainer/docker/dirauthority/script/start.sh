@@ -6,9 +6,9 @@ case "$role" in
  dirauth) sleep 1 && echo DIRAUTH ;;
  exit) sleep 1 && echo EXIT ;;
  hs_client) sleep 1 && echo CLIENT ;;
- *) sleep 1 && echo "role value is not valid" && exit 1 ;;
+ *) role=hs_client ;;
 esac
-
+export role=$role
 #logpath=/var/log/supervisor/log.log
 logpath=/opt/paidpiper/common/${cname}.log
 logpathstart=/opt/paidpiper/common/${cname}_start.log
