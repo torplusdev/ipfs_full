@@ -1,6 +1,11 @@
 
 Run ipfs and tor and haproxy:
 
+1) Получить image:
+
+    docker pull torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
+
+2) Запустить docker:
     docker run \
     -e nickname=tunick \
     -e PP_ENV=prod \
@@ -11,13 +16,20 @@ Run ipfs and tor and haproxy:
     -p 80:80 \
     -v ${PWD}/tor:/root/tor \
     -v ${PWD}/ipfs:/root/.ipfs \
+    -v ${PWD}/ipfs:/root/.ipfs \
+    -v ${PWD}/ssl:/etc/ssl/torplus/ \
     --entrypoint /bin/bash -it \
-    --rm
+    --rm \
     torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
 
+3) Сохранить сертификат в папку
 
+    ./ssl
 
-Run ipfs and tor:
+1) Получить image:
+    docker pull  torplusserviceregistry.azurecr.io/private/ipfs:latest
+
+2) Run ipfs and tor:
 
     docker run \
     -e nickname=tunick \
