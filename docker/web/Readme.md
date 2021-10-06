@@ -18,6 +18,8 @@ Run ipfs and tor and haproxy:
     -v ${PWD}/ipfs:/root/.ipfs \
     -v ${PWD}/ipfs:/root/.ipfs \
     -v ${PWD}/ssl:/etc/ssl/torplus/ \
+    -v ${PWD}/hidden_service:/root/hidden_service \
+    -v ${PWD}/ssl:/etc/ssl/torplus/ \
     --entrypoint /bin/bash -it \
     --rm \
     torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
@@ -26,7 +28,14 @@ Run ipfs and tor and haproxy:
 
     ./ssl
 
+4) Взять hostname:
+
+    cat hidden_service/hsv3/hostname
+    Добавить TXT запись в DNS:
+        torplus={hostname}
+
 1) Получить image:
+
     docker pull  torplusserviceregistry.azurecr.io/private/ipfs:latest
 
 2) Run ipfs and tor:
