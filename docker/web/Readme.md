@@ -1,3 +1,9 @@
+Установить docker 
+
+https://www.docker.com/products/docker-desktop
+
+Login to docker regestry:
+    docker login torplusserviceregistry.azurecr.io
 
 Run ipfs and tor and haproxy:
 
@@ -12,6 +18,7 @@ Run ipfs and tor and haproxy:
     -e seed=SCR27IGKMKXSOKUV7AC4T3HBTBVBL2MI45HHFSDNRYJFFVKWQAWBBKKZ \
     -e role=hs_client \
     -e HOST_PORT=80 \
+    -e PP_ENV=stage \
     -e WWW_IP=smartapi.ru \
     -p 80:80 \
     -v ${PWD}/tor:/root/tor \
@@ -42,7 +49,7 @@ Run ipfs and tor and haproxy:
 
     docker run \
     -e nickname=tunick \
-    -e PP_ENV=prod \
+    -e PP_ENV=stage \
     -e seed=SCR27IGKMKXSOKUV7AC4T3HBTBVBL2MI45HHFSDNRYJFFVKWQAWBBKKZ \
     -v ${PWD}/tor:/root/tor \
     -v ${PWD}/ipfs:/root/.ipfs \
