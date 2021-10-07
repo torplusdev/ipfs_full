@@ -6,12 +6,12 @@ done
 #torDataDir="/Users/tumarsal/tor"
 export hs_directory="/root/hidden_service"
 if [[ "${no_conf}" != "1" ]]; then
-  if [ ! -f /root/.ipfs ]; then 
+  if [ ! -f /root/.ipfs/config ]; then 
     source /opt/paidpiper/ipfs.${PP_ENV}.cfg
     echo /onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID}
     if [ ! -d "/root/.ipfs" ] 
     then
-      rm -rf /root/.ipfs
+      rm -rf /root/.ipfs/*
       if [[ "${role}" == "hs_client" ]]; then
         selfHsHostname="$(sed 's/[.].*$//' ${hs_directory}/hsv3/hostname)"
         /opt/paidpiper/ipfs init --announce=/onion3/${selfHsHostname}:4001 \
