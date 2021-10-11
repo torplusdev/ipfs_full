@@ -20,5 +20,6 @@ COPY docker/ipfs-docker-entrypoint.sh /ipfs-docker-entrypoint.sh
 RUN chmod 755 /ipfs-docker-entrypoint.sh
 COPY docker/debug-start.sh /debug-start.sh
 RUN chmod 755 /debug-start.sh
-ENTRYPOINT ["/usr/bin/supervisord"]
+ENTRYPOINT [ "/debug-start.sh" ]
+#ENTRYPOINT ["/usr/bin/supervisord"]
 

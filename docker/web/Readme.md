@@ -13,6 +13,7 @@ Run ipfs and tor and haproxy:
 
 2) Запустить docker:
     docker run \
+    --name torplus
     -e nickname=tum332 \
     -e seed=SCR27IGKMKXSOKUV7AC4T3HBTBVBL2MI45HHFSDNRYJFFVKWQAWBBKKZ \
     -e role=hs_client \
@@ -58,10 +59,13 @@ Run ipfs and tor and haproxy:
 2) Run ipfs and tor:
 
     docker run \
-    -e nickname=tunick \
+    -e nickname=tunick21 \
     -e PP_ENV=stage \
     -e seed=SCR27IGKMKXSOKUV7AC4T3HBTBVBL2MI45HHFSDNRYJFFVKWQAWBBKKZ \
     -v ${PWD}/tor:/root/tor \
     -v ${PWD}/ipfs:/root/.ipfs \
+    -v ${PWD}/hidden_service:/root/hidden_service \
+    --entrypoint /bin/bash -it \
+    --rm \
     torplusserviceregistry.azurecr.io/private/ipfs:latest
 
