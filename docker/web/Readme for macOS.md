@@ -12,9 +12,13 @@ Run ipfs and tor and haproxy:
 
     docker pull torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
 
-2) Запустить docker:
+2) Сохранить сертификат с сервера в папку
+
+    ./ssl
+    
+3) Запустить docker:
     docker run \
-    --name torplus
+    --name torplus \
     -e nickname=tum332 \
     -e seed=SCR27IGKMKXSOKUV7AC4T3HBTBVBL2MI45HHFSDNRYJFFVKWQAWBBKKZ \
     -e role=hs_client \
@@ -43,10 +47,6 @@ Run ipfs and tor and haproxy:
 -v ${PWD}/hidden_service:/root/hidden_service - onion address store 
 --rm  -- remove docker container when stop 
 
-
-3) Сохранить сертификат с сервера в папку
-
-    ./ssl
 
 4) Взять hostname (onion адресс создается при старте dockera):
 
