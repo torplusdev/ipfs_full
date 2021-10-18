@@ -10,9 +10,9 @@ image:
 	docker build --build-arg IFPS_VERSION=$(VERSION) -f Dockerfile \
 				-t ipfs \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
-				-t torplusserviceregistry.azurecr.io/private/ipfs:latest ../
-				-t torplusdev/production:ipfs-$(VERSION)
-				-t torplusdev/production:ipfs-latest
+				-t torplusserviceregistry.azurecr.io/private/ipfs:latest \
+				-t torplusdev/production:ipfs-$(VERSION) \
+				-t torplusdev/production:ipfs-latest ../
 
 push: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) 
@@ -34,9 +34,9 @@ image_ipfs_haproxy:
 	docker build -f All.Dockerfile \
 				-t ipfs_haproxy \
 				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
-				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest ../
-				-t torplusdev/production:ipfs_haproxy-$(VERSION)
-				-t torplusdev/production:ipfs_haproxy-latest
+				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest \
+				-t torplusdev/production:ipfs_haproxy-$(VERSION) \
+				-t torplusdev/production:ipfs_haproxy-latest ../
 
 push_ipfs_haproxy: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION)
