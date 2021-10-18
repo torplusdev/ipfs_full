@@ -111,7 +111,6 @@ use login and password is secret
         -v ${PWD}/hidden_service:/root/hidden_service \
         -v ${PWD}/static:/var/www/html \
         --rm \
-        --entrypoint /bin/bash -it statichoster
         torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
 
 ### Add Txt record to dns:
