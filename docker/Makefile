@@ -11,10 +11,16 @@ image:
 				-t ipfs \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
 				-t torplusserviceregistry.azurecr.io/private/ipfs:latest ../
+				-t torplusdev/production:ipfs-$(VERSION)
+				-t torplusdev/production:ipfs-latest
 
 push: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:latest
+
+push_git:
+	docker push torplusdev/production:ipfs-$(VERSION)
+	docker push torplusdev/production:ipfs-latest
 
 clean_up:
 	docker rmi --force \
@@ -29,11 +35,17 @@ image_ipfs_haproxy:
 				-t ipfs_haproxy \
 				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
 				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest ../
-
+				-t torplusdev/production:ipfs_haproxy-$(VERSION)
+				-t torplusdev/production:ipfs_haproxy-latest
 
 push_ipfs_haproxy: 
-	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) 
+	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION)
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
+
+push_ipfs_haproxy_git:
+	docker push torplusdev/production:ipfs_haproxy-$(VERSION)
+	docker push torplusdev/production:ipfs_haproxy-latest
+
 
 fast_image:
 	cd ../ && make build_linux
