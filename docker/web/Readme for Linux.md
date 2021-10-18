@@ -60,7 +60,6 @@ use login and password is secret
     torplusworkspace=<yourworkspacedir>
     cd ${torplusworkspace}
     mkdir -p ssl
-
 ### If use let's encrypt:
     
     # install certbot:
@@ -72,7 +71,7 @@ use login and password is secret
                     --non-interactive --agree-tos --email ${email} \
                     --http-01-port=80
 
-    cat /etc/letsencrypt/live/${domain}/fullchain.pem /etc/letsencrypt/live/${domain}/privkey.pem | ${torplusworkspace}/ssl/<domain>.pem
+    cat /etc/letsencrypt/live/${domain}/fullchain.pem /etc/letsencrypt/live/${domain}/privkey.pem | ${torplusworkspace}/ssl/${domain}.pem
           
 
 ## Pull docker image:
