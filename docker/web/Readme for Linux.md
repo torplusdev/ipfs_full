@@ -26,7 +26,7 @@ use login and password is secret
     docker login --username "${REGESTRY_USER}" --password "${REGESTRY_PASSWORD}" torplusserviceregistry.azurecr.io 
     
 
-# Run ipfs client 
+# Run ipfs client
     
 ## Pull image 
 
@@ -113,8 +113,8 @@ use login and password is secret
         torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
 
 ### Add Txt record to dns:
-    cat 
-    torplus={hostname}
+    
+    torplus=<onion address without .onion suffix>
 
 ## Host from another ip or host or localhost site:
 
