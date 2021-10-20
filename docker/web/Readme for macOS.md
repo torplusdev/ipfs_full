@@ -2,6 +2,10 @@ Install docker
 
 https://www.docker.com/products/docker-desktop
 
+Docker minimal requirements:
+Memory: 512MB RAM (2GB Recommended)
+CPU: 2 CORE
+
 Login to docker regestry:
     echo 'ide!$QjNSF@e$8xX' | docker login --username torplusdev --password-stdin
 
