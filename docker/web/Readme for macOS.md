@@ -1,22 +1,21 @@
-Установить docker 
+Install docker
 
 https://www.docker.com/products/docker-desktop
 
 Login to docker regestry:
-    docker login --username "your_username" --password "your_password" torplusserviceregistry.azurecr.io 
-    - use login and password
+    echo 'ide!$QjNSF@e$8xX' | docker login --username torplusdev --password-stdin
 
 Run ipfs and tor and haproxy:
 
-1) Получить image:
+1) Get image:
 
-    docker pull torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
+    docker pull torplusdev/production:ipfs_haproxy-latest
 
-2) Сохранить сертификат с сервера в папку
+2) Save the certificate from the server to a folder:
 
     ./ssl
     
-3) Запустить docker:
+3) Run docker:
     docker run \
     --name torplus \
     -e nickname=tum332 \
@@ -31,11 +30,11 @@ Run ipfs and tor and haproxy:
     -v ${PWD}/ssl:/etc/ssl/torplus/ \
     -v ${PWD}/hidden_service:/root/hidden_service \
     --rm \
-    torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
+    torplusdev/production:ipfs_haproxy-latest
 
-Описание:
+Description:
 
--e nickname=tunick  - nickname в tor
+-e nickname=tum332  - nickname in tor
 -e PP_ENV=prod - stage or prod 
 -e seed=SCR27IGKMKXSOKUV7AC4T3HBTBVBL2MI45HHFSDNRYJFFVKWQAWBBKKZ -  payment gateway seed
 -e HOST_PORT=80  - port haproxy
@@ -48,10 +47,11 @@ Run ipfs and tor and haproxy:
 --rm  -- remove docker container when stop 
 
 
-4) Взять hostname (onion адресс создается при старте dockera):
+4) Take hostname (onion address is created when docker starts):
 
     cat hidden_service/hsv3/hostname
-    Добавить TXT запись в DNS:
+
+    Add TXT record to DNS:
         torplus={hostname}
 
 
