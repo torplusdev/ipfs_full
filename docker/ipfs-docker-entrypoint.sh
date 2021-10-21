@@ -58,7 +58,7 @@ sed $SEDOPTION -e 's|/ip4/127.0.0.1/tcp/8080|/ip4/0.0.0.0/tcp/8080|g' /root/.ipf
 function addSomFileToIPFS() {
   sleep 30 
     echo "${ipfsSuperPeerID} is online!!" > /root/.ipfs/ipfstestfile.txt
-    /opt/paidpiper/ipfs add /root/.ipfs/ipfstestfile.txt > /root/.ipfs/ipfs_test_cid.txt
+    /opt/paidpiper/ipfs add -q /root/.ipfs/ipfstestfile.txt > /root/.ipfs/ipfs_test_cid.txt
 }
 
 if [ $# -eq 0 ]
