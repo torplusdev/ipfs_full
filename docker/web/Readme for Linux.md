@@ -47,7 +47,7 @@ use login and password is secret
         -v ${PWD}/ipfs:/root/.ipfs \
         -v ${PWD}/hidden_service:/root/hidden_service \
         --rm \
-        torplusdev/production:ipfs_haproxy-latest
+        torplusdev/production:ipfs-latest
 
 
 # Run web site hoster
@@ -57,7 +57,7 @@ use login and password is secret
     torplusworkspace=<yourworkspacedir>
     cd ${torplusworkspace}
     mkdir -p ssl
-    
+
 ### If use let's encrypt:
     
     # install certbot:
