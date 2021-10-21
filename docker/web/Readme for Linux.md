@@ -49,7 +49,6 @@ use login and password is secret
         -v ${PWD}/tor:/root/tor \
         -v ${PWD}/ipfs:/root/.ipfs \
         -v ${PWD}/hidden_service:/root/hidden_service \
-        --entrypoint /bin/bash -it \
         --rm \
         torplusserviceregistry.azurecr.io/private/ipfs:latest
 
