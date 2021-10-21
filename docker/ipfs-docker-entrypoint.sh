@@ -3,6 +3,13 @@ while [ ! -f /opt/paidpiper/.tor_ready ]; do
   sleep 2 # or less like 0.2
   echo "tor not ready yet..."
 done
+
+FREE=`df -k --output=avail "$PWD" | tail -n1`
+if [[ $FREE -lt 2485760 ]]; then   
+  echo "ERROR: Not enough free space"  # 2G = 2*1024*1024k
+  exit 1
+fi
+
 #torDataDir="/Users/tumarsal/tor"
 export hs_directory="/root/hidden_service"
 if [[ "${no_conf}" != "1" ]]; then
@@ -47,6 +54,13 @@ fi
 
 sed $SEDOPTION -e 's|/ip4/127.0.0.1/tcp/5001|/ip4/0.0.0.0/tcp/5001|g' /root/.ipfs/config 
 sed $SEDOPTION -e 's|/ip4/127.0.0.1/tcp/8080|/ip4/0.0.0.0/tcp/8080|g' /root/.ipfs/config
+
+function addSomFileToIPFS() {
+  sleep 30 
+    echo "${ipfsSuperPeerID} is online!!" > /root/.ipfs/ipfstestfile.txt
+    /opt/paidpiper/ipfs add /root/.ipfs/ipfstestfile.txt > /root/.ipfs/ipfs_test_cid.txt
+}
+
 if [ $# -eq 0 ]
 then
   if [[ "${ipfs_debug}" != "1" ]]; then

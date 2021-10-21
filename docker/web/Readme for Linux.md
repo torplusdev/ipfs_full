@@ -41,7 +41,8 @@ use login and password is secret
 
     # run docker container
     docker run \
-        --name topplusipfs
+        --name topplusipfs \
+        -p 28000:28080 \
         -e nickname=${nickname} \
         -e PP_ENV=stage \
         -e seed=SCR27IGKMKXSOKUV7AC4T3HBTBVBL2MI45HHFSDNRYJFFVKWQAWBBKKZ \
@@ -104,6 +105,7 @@ use login and password is secret
         -e WWW_IP=127.0.0.1:80 \
         -e useNginx=1 \
         -p 80:80 \
+        -p 28000:28080 \
         -v ${PWD}/tor:/root/tor \
         -v ${PWD}/ipfs:/root/.ipfs \
         -v ${PWD}/ssl:/etc/ssl/torplus/ \
@@ -137,6 +139,7 @@ use login and password is secret
             -e PP_ENV=prod \
             -e WWW_IP=${domain} \
             -p 80:80 \
+            -p 28000:28080 \
             -v ${PWD}/tor:/root/tor \
             -v ${PWD}/ipfs:/root/.ipfs \
             -v ${PWD}/ssl:/etc/ssl/torplus/ \
