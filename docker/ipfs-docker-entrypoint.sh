@@ -63,6 +63,8 @@ function addSomFileToIPFS() {
     /opt/paidpiper/ipfs add -q /root/.ipfs/ipfstestfile.txt > /root/.ipfs/ipfs_test_cid.txt
 }
 
+addSomFileToIPFS &
+
 if [ $# -eq 0 ]
 then
   if [[ "${ipfs_debug}" != "1" ]]; then
