@@ -4,11 +4,13 @@ while [ ! -f /opt/paidpiper/.tor_ready ]; do
   echo "tor not ready yet..."
 done
 
-FREE=`df -k --output=avail "$PWD" | tail -n1`
-if [[ $FREE -lt 2485760 ]]; then   
-  echo "ERROR: Not enough free space"  # 2G = 2*1024*1024k
-  exit 1
-fi
+if [[ "${SKIPSPCECHECK}" != "1" ]]; then
+  FREE=`df -k --output=avail "$PWD" | tail -n1`
+  if [[ $FREE -lt 2485760 ]]; then   
+    echo "ERROR: Not enough free space"  # 2G = 2*1024*1024k
+    exit 1
+  fi
+fi 
 
 #torDataDir="/Users/tumarsal/tor"
 export hs_directory="/root/hidden_service"
