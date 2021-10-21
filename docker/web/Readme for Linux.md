@@ -4,7 +4,7 @@
 
        curl -fsSL https://get.docker.com -o get-docker.sh
        sh get-docker.sh
-       sudo chmod +x /usr/bin/docker
+       sudo usermod -aG docker $USER
 
 Docker minimal requirements:
     
@@ -14,8 +14,9 @@ CPU: 2 CORE
 
 ## Create workspace directory:
 
-        mkdir -p <pathofworkspace>
-        cd <pathofworkspace>
+        torplusworkspace=<yourworkspacedir>
+        mkdir -p ${torplusworkspace}
+        cd ${torplusworkspace}
 
 ## Login to docker regestry:
 
