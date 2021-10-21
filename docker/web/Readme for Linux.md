@@ -4,7 +4,7 @@
 
        curl -fsSL https://get.docker.com -o get-docker.sh
        sh get-docker.sh
-       chmod +x /usr/bin/docker
+       sudo chmod +x /usr/bin/docker
 
 Docker minimal requirements:
     
@@ -21,16 +21,13 @@ CPU: 2 CORE
 
 use login and password is secret
 
-    REGESTRY_USER=<username>
-    REGESTRY_PASSWORD=<password>
-    docker login --username "${REGESTRY_USER}" --password "${REGESTRY_PASSWORD}" torplusserviceregistry.azurecr.io 
-    
+    echo 'ide!$QjNSF@e$8xX' | docker login --username torplusdev --password-stdin
 
 # Run ipfs client
     
 ## Pull image 
 
-    docker pull torplusserviceregistry.azurecr.io/private/ipfs:latest
+    docker pull torplusdev/production:ipfs_haproxy-latest
 
 ## Run torplus container with ipfs: 
 
@@ -50,7 +47,7 @@ use login and password is secret
         -v ${PWD}/ipfs:/root/.ipfs \
         -v ${PWD}/hidden_service:/root/hidden_service \
         --rm \
-        torplusserviceregistry.azurecr.io/private/ipfs:latest
+        torplusdev/production:ipfs_haproxy-latest
 
 
 # Run web site hoster
@@ -60,6 +57,7 @@ use login and password is secret
     torplusworkspace=<yourworkspacedir>
     cd ${torplusworkspace}
     mkdir -p ssl
+    
 ### If use let's encrypt:
     
     # install certbot:
@@ -76,7 +74,7 @@ use login and password is secret
 
 ## Pull docker image:
 
-     docker pull torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
+     docker pull torplusdev/production:ipfs_haproxy-latest
 
 ## For host static files
 
@@ -111,7 +109,7 @@ use login and password is secret
         -v ${PWD}/hidden_service:/root/hidden_service \
         -v ${PWD}/static:/var/www/html \
         --rm \
-        torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
+        torplusdev/production:ipfs_haproxy-latest
 
 ### Add Txt record to dns:
     
@@ -145,5 +143,5 @@ use login and password is secret
             -v ${PWD}/hidden_service:/root/hidden_service \
             --add-host host.docker.internal:host-gateway \
             --rm \
-            torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest
+            torplusdev/production:ipfs_haproxy-latest
 
