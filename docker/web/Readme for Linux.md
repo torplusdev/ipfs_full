@@ -37,14 +37,14 @@ use login and password is secret
     cd ${torplusworkspace}
 
     nickname=tunick21
-
+    seed=SCR27IGKMKXSOKUV7AC4T3HBTBVBL2MI45HHFSDNRYJFFVKWQAWBBKKZ
     # run docker container
     docker run \
         --name topplusipfs \
         -p 28000:28080 \
         -e nickname=${nickname} \
         -e PP_ENV=stage \
-        -e seed=SCR27IGKMKXSOKUV7AC4T3HBTBVBL2MI45HHFSDNRYJFFVKWQAWBBKKZ \
+        -e seed=${seed} \
         -v ${PWD}/tor:/root/tor \
         -v ${PWD}/ipfs:/root/.ipfs \
         -v ${PWD}/hidden_service:/root/hidden_service \
