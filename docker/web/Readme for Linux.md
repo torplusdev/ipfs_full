@@ -115,6 +115,7 @@ use login and password is secret
 
 ### Add Txt record to dns:
     
+    cat ${torplusworkspace}/hidden_service/hsv3/hostname
     torplus=<onion address without .onion suffix>
 
 ## Host from another ip or host or localhost site:
