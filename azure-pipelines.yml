@@ -25,6 +25,7 @@ strategy:
       ext: ".exe"
       addldflags: '-ldflags -H=windowsgui'
 #      addBuildNumber: 'BUILD_NUMBER=$(Build.BuildNumber)'
+      addBuildNumber: ''
     mac:
       poolName: 'Azure Pipelines'
       vmImage: 'macOS-10.14'
