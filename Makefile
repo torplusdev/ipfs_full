@@ -13,6 +13,21 @@ build_current:
 	rm -rf ./ipfs
 	(cd go-ipfs/cmd/ipfs && CGO_ENABLED=1 go build -ldflags "$(LDFLAGSVERSION)" .)
 	mv ./go-ipfs/cmd/ipfs/ipfs ipfs 
+
+build_mac:
+	rm -rf ./ipfs
+	(cd go-ipfs/cmd/ipfs && go build -ldflags "$(LDFLAGSVERSION)" -o ./ipfs)
+	mv ./go-ipfs/cmd/ipfs/ipfs ipfs
+build_linux:
+	rm -rf ./ipfs
+	(cd go-ipfs/cmd/ipfs && go build -ldflags "$(LDFLAGSVERSION)" -o ./ipfs)
+	mv ./go-ipfs/cmd/ipfs/ipfs ipfs
+build_windows:
+	rm -rf ./ipfs.exe
+	(cd go-ipfs/cmd/ipfs && go build -ldflags "$(LDFLAGSVERSION) -H=windowsgui" -o ./ipfs.exe)
+	mv ./go-ipfs/cmd/ipfs/ipfs.exe ipfs.exe
+
+
 run-daemon:
 	./ipfs daemon
 clean:

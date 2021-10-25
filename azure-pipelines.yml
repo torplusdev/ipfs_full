@@ -24,7 +24,7 @@ strategy:
       osName: 'windows'
       ext: ".exe"
       addldflags: '-ldflags -H=windowsgui'
-      addBuildNumber: ''
+      addBuildNumber: 'BUILD_NUMBER=$(Build.BuildNumber)'
     mac:
       poolName: 'Azure Pipelines'
       vmImage: 'macOS-10.14'
@@ -38,8 +38,8 @@ pool:
   vmImage: $(vmImage)
 
 variables:
-   major: 1
-   minor: 0
+  major: 1
+  minor: 0
 
 name: $(major).$(minor)$(Rev:.r)
 
@@ -64,13 +64,13 @@ steps:
   displayName: 'go download deps'
 
 - script: |
-    $(addBuildNumber) go build -v $(addldflags)
-  workingDirectory: $(Build.SourcesDirectory)/go-ipfs/cmd/ipfs
+    $(addBuildNumber) make build_$(osName)
+  workingDirectory: $(Build.SourcesDirectory)
   displayName: 'Building Go Ipfs'
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.SourcesDirectory)/go-ipfs/cmd/ipfs/ipfs$(ext)'
+    rootFolderOrFile: '$(Build.SourcesDirectory)/ipfs$(ext)'
     includeRootFolder: true
     archiveType: '7z'
     sevenZipCompression: 'ultra'
