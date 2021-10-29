@@ -1,13 +1,9 @@
 #!/bin/sh
 
-function runNginx(){
-    sleep 5
-    if [[ "${useNginx}" = "1" ]]; then
+ if [[ "${useNginx}" = "1" ]]; then
         nginx   
-    fi
-}
+fi
 
-runNginx &
 /pg-docker-entrypoint.sh &
 /tor-docker-entrypoint.sh &
 /haproxy-docker-entrypoint.sh &
