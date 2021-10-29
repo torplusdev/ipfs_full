@@ -129,7 +129,7 @@ use login and password is secret
 
         nickname=tum332
 
-        domain=smartapi.ru
+        domain=torplus.wikitpdemo.com
         
         docker run \
             --name torplus \
