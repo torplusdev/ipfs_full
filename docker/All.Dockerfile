@@ -13,6 +13,7 @@ COPY --from=pg /opt/paidpiper/payment-gateway /opt/paidpiper/payment-gateway
 COPY --from=pg /opt/paidpiper/config.json.tmpl /opt/paidpiper/config.json.tmpl
 COPY --from=pg /pg-docker-entrypoint.sh /pg-docker-entrypoint.sh
 
+ENV PATH="/opt/paidpiper:${PATH}"
 
 RUN apt-get update && \
     apt-get install -y curl supervisor gettext-base && \
