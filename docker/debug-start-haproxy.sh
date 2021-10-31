@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ "${useNginx}" == "1" ]]; then
         nginx   
