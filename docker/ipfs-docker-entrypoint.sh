@@ -24,13 +24,15 @@ if [[ "${no_conf}" != "1" ]]; then
       /opt/paidpiper/ipfs init --announce=/onion3/${selfHsHostname}:4001 \
           --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} \
           --torPath=/usr/local/bin/tor \
-          --torConfigPath=/usr/local/etc/tor/torrc
+          --torConfigPath=/usr/local/etc/tor/torrc \
+          --dhtRoutingType=dhtserver
       echo "Run as node"
     else 
       /opt/paidpiper/ipfs init \
           --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} \
           --torPath=/usr/local/bin/tor \
-          --torConfigPath=/usr/local/etc/tor/torrc
+          --torConfigPath=/usr/local/etc/tor/torrc \
+          --dhtRoutingType=dhtserver
       echo "Run as client "
     fi  
   fi  
