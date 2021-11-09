@@ -11,7 +11,8 @@ function checkPEM {
         fi
 }
 
-ls /etc/ssl/torplus/ | xargs -I {} checkPEM {}
+ls -1 /etc/ssl/torplus/ | sed -e 's/\.pem$//' | xargs -I {} checkPEM {}
+
 
 
 /pg-docker-entrypoint.sh &
