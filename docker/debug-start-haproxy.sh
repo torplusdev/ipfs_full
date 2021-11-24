@@ -15,14 +15,14 @@ function checkPEM {
 }
 if [ -z "$(ls -A /etc/ssl/torplus/)" ]; then
    echo "ssl directory empty"
-   exit .
+   exit 1
 fi
 ls -1 /etc/ssl/torplus/ | sed -e 's/\.pem$//' | xargs -I {} checkPEM {}
-
 
 
 /pg-docker-entrypoint.sh &
 /tor-docker-entrypoint.sh &
 /haproxy-docker-entrypoint.sh &
-/ipfs-docker-entrypoint.sh 
+/ipfs-docker-entrypoint.sh &
 
+while true; do sleep 10000; done
