@@ -5,10 +5,12 @@ if [[ "${useNginx}" == "1" ]]; then
 fi
 
 function checkPEM {
-        domain=$1       
-        if [[ "$(openssl x509 -noout -subject -in /etc/ssl/torplus/${domain}.pcm | awk -F = '{print $3}')" != "${domain}" ]]; then 
-                echo "Certificate for ${domain} not valid."
-                exit 1
+        domain=$1 
+        if [[ $domain != "" ]]; then       
+                if [[ "$(openssl x509 -noout -subject -in /etc/ssl/torplus/${domain}.pcm | awk -F = '{print $3}')" != "${domain}" ]]; then 
+                        echo "Certificate for ${domain} not valid."
+                        exit 1
+                fi
         fi
 }
 if [ -z "$(ls -A /etc/ssl/torplus/)" ]; then
