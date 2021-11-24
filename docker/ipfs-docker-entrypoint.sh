@@ -70,9 +70,9 @@ addSomFileToIPFS &
 if [ $# -eq 0 ]
 then
   if [[ "${ipfs_debug}" != "1" ]]; then
-    /opt/paidpiper/ipfs daemon --debug | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready" >> /opt/paidpiper/logs/ipfs.log
-  else 
     /opt/paidpiper/ipfs daemon | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready" >> /opt/paidpiper/logs/ipfs.log
+  else 
+    /opt/paidpiper/ipfs daemon --debug | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready" >> /opt/paidpiper/logs/ipfs.log
   fi
    
 else 
