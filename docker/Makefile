@@ -55,14 +55,14 @@ run_it:
 		-e PP_ENV=stage \
 		-e role=hs_client \
 		-p 9051:9051 -p 9050:9050 -p 5001:5001 -p 8080:8080 -p 28080:28080 \
-		-v $(PWD)/vol:/opt/paidpiper/vol \
+		-v $(PWD)/vol:/opt/torplus/vol \
 		--entrypoint /bin/bash ipfs
 run_it_prod:
 	docker run -it --name ipfs --rm \
 		-e PP_ENV=prod \
 		-e role=hs_client \
 		-p 9051:9051 -p 9050:9050 -p 5001:5001 -p 8080:8080 -p 28080:28080 \
-		-v $(PWD)/vol:/opt/paidpiper/vol \
+		-v $(PWD)/vol:/opt/torplus/vol \
 		--entrypoint /bin/bash ipfs
 run_ipfs_haproxy: 
 	docker run -it --name ipfs_haproxy --rm \
@@ -70,7 +70,7 @@ run_ipfs_haproxy:
 		-e role=hs_client \
 		--rm \
 		-p 9051:9051 -p 9050:9050 -p 8080:8080 -p 28080:28080 \
-		-v $(PWD)/vol:/opt/paidpiper/vol \
+		-v $(PWD)/vol:/opt/torplus/vol \
 		--entrypoint /bin/bash ipfs_haproxy:latest
 dockerlines:
 	cd ../ && find . -name 'go.mod' | xargs -I {} echo COPY {} {}

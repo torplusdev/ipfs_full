@@ -1,5 +1,5 @@
 #!/bin/bash
-while [ ! -f /opt/paidpiper/.tor_ready ]; do
+while [ ! -f /opt/torplus/.tor_ready ]; do
   sleep 2 # or less like 0.2
   echo "tor not ready yet..."
 done
@@ -16,19 +16,19 @@ fi
 export hs_directory="/root/hidden_service"
 if [[ "${no_conf}" != "1" ]]; then
   if [ ! -f /root/.ipfs/config ]; then 
-    source /opt/paidpiper/ipfs.${PP_ENV}.cfg
+    source /opt/torplus/ipfs.${PP_ENV}.cfg
     echo /onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID}
     rm -rf /root/.ipfs/*
     if [[ "${role}" == "hs_client" ]]; then
       selfHsHostname="$(sed 's/[.].*$//' ${hs_directory}/hsv3/hostname)"
-      /opt/paidpiper/ipfs init --announce=/onion3/${selfHsHostname}:4001 \
+      /opt/torplus/ipfs init --announce=/onion3/${selfHsHostname}:4001 \
           --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} \
           --torPath=/usr/local/bin/tor \
           --torConfigPath=/usr/local/etc/tor/torrc \
           --dhtRoutingType=dhtserver
       echo "Run as node"
     else 
-      /opt/paidpiper/ipfs init \
+      /opt/torplus/ipfs init \
           --bootStrap=/onion3/${hsHostname}:4001/p2p/${ipfsSuperPeerID} \
           --torPath=/usr/local/bin/tor \
           --torConfigPath=/usr/local/etc/tor/torrc \
@@ -62,7 +62,7 @@ sed $SEDOPTION -e 's|/ip4/127.0.0.1/tcp/8080|/ip4/0.0.0.0/tcp/8080|g' /root/.ipf
 function addSomFileToIPFS() {
   sleep 30 
     echo "${ipfsSuperPeerID} is online!!" > /root/.ipfs/ipfstestfile.txt
-    /opt/paidpiper/ipfs add -q /root/.ipfs/ipfstestfile.txt > /root/.ipfs/ipfs_test_cid.txt
+    /opt/torplus/ipfs add -q /root/.ipfs/ipfstestfile.txt > /root/.ipfs/ipfs_test_cid.txt
 }
 
 addSomFileToIPFS &
@@ -70,11 +70,11 @@ addSomFileToIPFS &
 if [ $# -eq 0 ]
 then
   if [[ "${ipfs_debug}" != "1" ]]; then
-    /opt/paidpiper/ipfs daemon | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready" >> /opt/paidpiper/logs/ipfs.log
+    /opt/torplus/ipfs daemon | mark "Daemon is ready" "/opt/torplus/.ipfs_ready" >> /opt/torplus/logs/ipfs.log
   else 
-    /opt/paidpiper/ipfs daemon --debug | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready" >> /opt/paidpiper/logs/ipfs.log
+    /opt/torplus/ipfs daemon --debug | mark "Daemon is ready" "/opt/torplus/.ipfs_ready" >> /opt/torplus/logs/ipfs.log
   fi
    
 else 
-    exec "$@" | mark "Daemon is ready" "/opt/paidpiper/.ipfs_ready" >> /opt/paidpiper/logs/ipfs.log
+    exec "$@" | mark "Daemon is ready" "/opt/torplus/.ipfs_ready" >> /opt/torplus/logs/ipfs.log
 fi

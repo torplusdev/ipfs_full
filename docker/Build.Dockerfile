@@ -1,5 +1,5 @@
 FROM golang:1.16.8 as build
-WORKDIR /opt/paidpiper/ipfs_full
+WORKDIR /opt/torplus/ipfs_full
 RUN apt-get update && apt-get install -y build-essential manpages-dev git
 #---------------
 COPY ./go-libp2p-swarm/go.mod ./go-libp2p-swarm/go.mod
@@ -37,9 +37,9 @@ COPY ./go-ipfs/docs/examples/go-ipfs-as-a-library/go.sum ./go-ipfs/docs/examples
 COPY ./go-multiaddr-net/go.sum ./go-multiaddr-net/go.sum
 COPY ./go-libp2p-kbucket/go.mod ./go-libp2p-kbucket/go.mod 
 COPY ./go-libp2p-kbucket/go.sum ./go-libp2p-kbucket/go.sum 
-WORKDIR /opt/paidpiper/ipfs_full/go-ipfs
+WORKDIR /opt/torplus/ipfs_full/go-ipfs
 RUN go mod download
-WORKDIR /opt/paidpiper/ipfs_full
+WORKDIR /opt/torplus/ipfs_full
 RUN rm -rf *
 
 COPY go-bitswap go-bitswap
@@ -59,5 +59,5 @@ COPY ipfs_config ipfs_config
 COPY Makefile Makefile
 
 
-WORKDIR /opt/paidpiper/ipfs_full
+WORKDIR /opt/torplus/ipfs_full
 RUN make build_current

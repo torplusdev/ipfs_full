@@ -9,17 +9,17 @@ FROM torplusserviceregistry.azurecr.io/private/haproxy:latest
 ARG IPFS_VERSION IPFS_VERSION
 ENV IPFS_VERSION $IPFS_VERSION
 
-COPY --from=pg /opt/paidpiper/payment-gateway /opt/paidpiper/payment-gateway
-COPY --from=pg /opt/paidpiper/config.json.tmpl /opt/paidpiper/config.json.tmpl
+COPY --from=pg /opt/torplus/payment-gateway /opt/torplus/payment-gateway
+COPY --from=pg /opt/torplus/config.json.tmpl /opt/torplus/config.json.tmpl
 COPY --from=pg /pg-docker-entrypoint.sh /pg-docker-entrypoint.sh
 
-ENV PATH="/opt/paidpiper:${PATH}"
+ENV PATH="/opt/torplus:${PATH}"
 
 RUN apt-get update && \
     apt-get install -y curl supervisor gettext-base && \
     rm -rf /var/lib/apt/lists/*
-WORKDIR /opt/paidpiper/
-COPY --from=build /opt/paidpiper/ipfs_full/ipfs ipfs
+WORKDIR /opt/torplus/
+COPY --from=build /opt/torplus/ipfs_full/ipfs ipfs
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/ipfs.prod.cfg ipfs.prod.cfg
 COPY docker/ipfs.stage.cfg ipfs.stage.cfg

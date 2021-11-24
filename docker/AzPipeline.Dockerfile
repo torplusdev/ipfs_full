@@ -8,7 +8,7 @@ ENV PP_ENV $PP_ENV
 RUN apt-get update && \
     apt-get install -y curl supervisor gettext-base && \
     rm -rf /var/lib/apt/lists/*
-WORKDIR /opt/paidpiper/
+WORKDIR /opt/torplus/
 COPY go-ipfs/cmd/ipfs/ipfs ipfs
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/ipfs.prod.cfg ipfs.prod.cfg
