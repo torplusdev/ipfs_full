@@ -37,7 +37,13 @@ image_ipfs_haproxy:
 				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest \
 				-t torplusdev/production:ipfs_haproxy-$(VERSION) \
 				-t torplusdev/production:ipfs_haproxy-latest ../
-
+image_ipfs_haproxy_rebuild: 
+	docker build -f All.Dockerfile.Rebuild \
+				-t ipfs_haproxy \
+				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION) \
+				-t torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest \
+				-t torplusdev/production:ipfs_haproxy-$(VERSION) \
+				-t torplusdev/production:ipfs_haproxy-latest ../
 push_ipfs_haproxy: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:$(VERSION)
 	docker push torplusserviceregistry.azurecr.io/private/ipfs_haproxy:latest

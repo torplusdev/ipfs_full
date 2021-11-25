@@ -3,7 +3,7 @@ while [ ! -f /opt/torplus/.tor_ready ]; do
   sleep 2 # or less like 0.2
   echo "tor not ready yet..."
 done
-
+echo "Check free space..."
 if [[ "${SKIPSPCECHECK}" != "1" ]]; then
   FREE=`df -k --output=avail "$PWD" | tail -n1`
   if [[ $FREE -lt 2485760 ]]; then   
@@ -11,7 +11,7 @@ if [[ "${SKIPSPCECHECK}" != "1" ]]; then
     exit 1
   fi
 fi 
-
+echo "Configure ipfs ..."
 #torDataDir="/Users/tumarsal/tor"
 export hs_directory="/root/hidden_service"
 if [[ "${no_conf}" != "1" ]]; then
@@ -61,13 +61,15 @@ sed $SEDOPTION -e 's|/ip4/127.0.0.1/tcp/8080|/ip4/0.0.0.0/tcp/8080|g' /root/.ipf
 
 function addSomFileToIPFS() {
   sleep 30 
+  echo "Create ipfs check files ipfs ..."
   echo "${ipfsSuperPeerID} is online!!" > /root/.ipfs/ipfstestfile.txt
   /opt/torplus/ipfs add -q /root/.ipfs/ipfstestfile.txt > /root/.ipfs/ipfs_test_cid.txt
+  echo "Try get file from ipfs ..."
   /opt/torplus/ipfs cat QmVvYTju2wUdnVJGXVyWWqM7mrqVsH1dNLf1MYfeCDnUFe
 }
 
 addSomFileToIPFS &
-
+echo "Start ipfs daemon ..."
 if [ $# -eq 0 ]
 then
   if [[ "${ipfs_debug}" != "1" ]]; then

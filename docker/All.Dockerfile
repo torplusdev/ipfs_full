@@ -18,8 +18,8 @@ ENV PATH="/opt/torplus:${PATH}"
 RUN apt-get update && \
     apt-get install -y curl supervisor gettext-base && \
     rm -rf /var/lib/apt/lists/*
-WORKDIR /opt/torplus/
-COPY --from=build /opt/torplus/ipfs_full/ipfs ipfs
+WORKDIR /opt/paidpiper/
+COPY --from=build /opt/paidpiper/ipfs_full/ipfs ipfs
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/ipfs.prod.cfg ipfs.prod.cfg
 COPY docker/ipfs.stage.cfg ipfs.stage.cfg
@@ -27,6 +27,12 @@ COPY docker/ipfs-docker-entrypoint.sh /ipfs-docker-entrypoint.sh
 RUN chmod 755 /ipfs-docker-entrypoint.sh
 COPY docker/debug-start-haproxy.sh /debug-start.sh
 RUN chmod 755 /debug-start.sh
+
+COPY docker/tor-docker-entrypoint.sh /tor-docker-entrypoint.sh
+RUN chmod 755 /tor-docker-entrypoint.sh
+COPY docker/configs configs
+RUN chmod 755 /debug-start.sh
+
 ENTRYPOINT [ "/debug-start.sh" ]
 #ENTRYPOINT ["/usr/bin/supervisord"]
 

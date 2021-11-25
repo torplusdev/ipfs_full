@@ -11,7 +11,7 @@ function checkPEM {
                 domFromFile="$(openssl x509 -noout -subject -in /etc/ssl/torplus/${domain}.pem | awk -F = '{print $3}' | awk '{$1=$1};1')"       
                 if [[ "${domFromFile}" != "${domain}" ]]; then 
                         echo "Certificate for ${domain} != ${domFromFile}  not valid."
-                        
+                        exit 1
                 fi
         fi
 }
