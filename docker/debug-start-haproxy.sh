@@ -31,6 +31,5 @@ set -m
         (/tor-docker-entrypoint.sh || kill 0) &
         (/haproxy-docker-entrypoint.sh || kill 0) &
         (/ipfs-docker-entrypoint.sh || kill 0) &
-        done
         wait
 )
