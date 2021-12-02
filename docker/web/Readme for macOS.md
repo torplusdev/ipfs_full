@@ -56,6 +56,6 @@ Description:
     cat hidden_service/hsv3/hostname
 
     Add TXT record to DNS:
-        torplus={hostname}
+        echo torplus=$(cat hidden_service/hsv3/hostname)
 
 

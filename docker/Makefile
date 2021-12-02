@@ -13,7 +13,14 @@ image:
 				-t torplusserviceregistry.azurecr.io/private/ipfs:latest \
 				-t torplusdev/production:ipfs-$(VERSION) \
 				-t torplusdev/production:ipfs-latest ../
-
+image_rebuild:
+	docker build --build-arg IFPS_VERSION=$(VERSION) -f Dockerfile.Rebuild \
+				-t ipfs \
+				-t torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) \
+				-t torplusserviceregistry.azurecr.io/private/ipfs:latest \
+				-t torplusdev/production:ipfs-$(VERSION) \
+				-t torplusdev/production:ipfs-latest ../
+	
 push: 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:$(VERSION) 
 	docker push torplusserviceregistry.azurecr.io/private/ipfs:latest
