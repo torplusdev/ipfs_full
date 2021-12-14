@@ -7,7 +7,7 @@ fi
 function checkPEM {
         domain=$1 
         echo "checkPEM ${domain}"
-        if [[ $domain != "" ]]; then
+        if [[ "$domain" != "" ]]; then
                 domFromFile="$(openssl x509 -noout -subject -in /etc/ssl/torplus/${domain}.pem | awk -F = '{print $3}' | awk '{$1=$1};1')"       
                 if [[ "${domFromFile}" != "${domain}" ]]; then 
                         echo "Certificate for ${domain} != ${domFromFile}  not valid."
