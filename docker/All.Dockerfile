@@ -14,7 +14,7 @@ COPY --from=pg /opt/torplus/config.json.tmpl /opt/torplus/config.json.tmpl
 COPY --from=pg /pg-docker-entrypoint.sh /pg-docker-entrypoint.sh
 
 ENV PATH="/opt/torplus:${PATH}"
-
+ENV PP_ENV=prod
 RUN apt-get update && \
     apt-get install -y curl supervisor gettext-base && \
     rm -rf /var/lib/apt/lists/*
