@@ -16,7 +16,7 @@ build_current:
 
 build_mac:
 	rm -rf ./ipfs
-	(cd go-ipfs/cmd/ipfs && go16 build -ldflags "$(LDFLAGSVERSION)" -o ./ipfs)
+	(cd go-ipfs/cmd/ipfs && go build -ldflags "$(LDFLAGSVERSION)" -o ./ipfs)
 	mv ./go-ipfs/cmd/ipfs/ipfs ipfs
 build_linux:
 	rm -rf ./ipfs
