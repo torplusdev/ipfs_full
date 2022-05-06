@@ -100,4 +100,4 @@ update_config_prod:
 
 init:
 	rm -rf ~/.ipfs
-	PP_ENV=stage sh ./ipfs.init.sh
+	PP_ENV=prod sh ./ipfs.init.sh
