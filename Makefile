@@ -16,17 +16,19 @@ build_current:
 
 build_mac:
 	rm -rf ./ipfs
+	go version
 	(cd go-ipfs/cmd/ipfs && go build -ldflags "$(LDFLAGSVERSION)" -o ./ipfs)
 	mv ./go-ipfs/cmd/ipfs/ipfs ipfs
 build_linux:
 	rm -rf ./ipfs
+	go version
 	(cd go-ipfs/cmd/ipfs && go build -ldflags "$(LDFLAGSVERSION)" -o ./ipfs)
 	mv ./go-ipfs/cmd/ipfs/ipfs ipfs
 build_windows:
 	rm -rf ./ipfs.exe
+	go version
 	(cd go-ipfs/cmd/ipfs && go build -ldflags "$(LDFLAGSVERSION) -H=windowsgui" -o ./ipfs.exe)
 	mv ./go-ipfs/cmd/ipfs/ipfs.exe ipfs.exe
-
 
 run-daemon:
 	./ipfs daemon
