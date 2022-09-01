@@ -67,7 +67,14 @@ function addSomFileToIPFS() {
   echo "Try get file from ipfs ..."
   /opt/torplus/ipfs cat QmVvYTju2wUdnVJGXVyWWqM7mrqVsH1dNLf1MYfeCDnUFe
 }
-
+function ipfsFill(){
+  while [ "false" != "true" ]; do
+    #sleep 60*60*24 
+    sleep 606024
+    /opt/torplus/ipfs fill
+  fi 
+}
+ipfsFill &
 addSomFileToIPFS &
 echo "Start ipfs daemon ..."
 if [ $# -eq 0 ]
