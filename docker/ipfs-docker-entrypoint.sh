@@ -72,7 +72,7 @@ function ipfsFill(){
     #sleep 60*60*24 
     sleep 606024
     /opt/torplus/ipfs fill
-  fi 
+  done
 }
 ipfsFill &
 addSomFileToIPFS &
