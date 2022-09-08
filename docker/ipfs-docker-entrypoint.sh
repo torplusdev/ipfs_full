@@ -68,10 +68,13 @@ function addSomFileToIPFS() {
   /opt/torplus/ipfs cat QmVvYTju2wUdnVJGXVyWWqM7mrqVsH1dNLf1MYfeCDnUFe
 }
 function ipfsFill(){
+  echo "Ipfs fill will start each 606024 seconds"
   while [ "false" != "true" ]; do
     #sleep 60*60*24 
     sleep 606024
+    echo "Ipfs fill start"
     /opt/torplus/ipfs fill
+    echo "Ipfs fill end"
   done
 }
 ipfsFill &
