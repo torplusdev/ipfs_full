@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+echo "Starting TOR PLUS"
 # check role
 case "$role" in
  client) echo CLIENT ;;
@@ -15,7 +16,7 @@ case "$PP_ENV" in
  *) sleep 1 && echo "PP_ENV not valid $role" && exit 1 ;;
 esac
 #export data_directory="/Users/tumarsal/tor"
-if [[ "${no_conf}" != "1" ]]; then
+if [ "${no_conf}" != "1" ]; then
   source /opt/torplus/tor.${PP_ENV}.cfg
   export dirauth=$dirauth
   export data_directory="/root/tor"
@@ -28,6 +29,7 @@ if [[ "${no_conf}" != "1" ]]; then
   if [[ -z "${self_host}" ]]; then
    export self_host="$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/')"
   fi
+  echo "Generate torrc by ${role} template" 
   mkdir -p /usr/local/etc/tor/ && cat /opt/torplus/configs/${role}_torrc.tmpl | envsubst > /usr/local/etc/tor/torrc
 fi
 function mark {

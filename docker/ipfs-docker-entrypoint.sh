@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Starting IPFS PLUS"
 while [ ! -f /opt/torplus/.tor_ready ]; do
   sleep 2 # or less like 0.2
   echo "tor not ready yet..."
