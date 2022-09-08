@@ -28,7 +28,7 @@ strategy:
       addBuildNumber: ''
     mac:
       poolName: 'Azure Pipelines'
-      vmImage: 'macOS-10.15'
+      vmImage: 'macOS-11'
       osName: 'mac'
       ext: ''
       addldflags: ''
