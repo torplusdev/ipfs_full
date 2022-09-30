@@ -60,4 +60,7 @@ COPY Makefile Makefile
 
 
 WORKDIR /opt/torplus/ipfs_full
+COPY ./.git ./.git
 RUN make build_current
+RUN rm -rf .git
+#CMD tail -f /dev/null
